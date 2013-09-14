@@ -42,9 +42,10 @@ namespace Xaml.Chat.Client.ViewModels
             }
         }
 
-        public LoginRegisterFormViewModel LoginRegisterVM { get; set; }
         public ConversationViewModel ConversationVM { get; set; }
         public RegisterFormViewModel RegisterFormVM { get; set; }
+        public GeneralViewModel GeneralVM { get; set; }
+        public LoginViewModel LoginVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -78,14 +79,6 @@ namespace Xaml.Chat.Client.ViewModels
         private void HandleLogoutCommand(object parameter)
         {
             // TODO: our own logout logic
-            //bool isUserLoggedOut = DataPersister.LogoutUser();
-            //if (isUserLoggedOut)
-            //{
-            //    this.Username = "";
-            //    this.LoggedInUser = false;
-            //    //this.CurrentViewModel = this.LoginRegisterVM;
-            //    this.HandleChangeViewModelCommand(this.LoginRegisterVM);
-            //}
 
         }
 
@@ -99,27 +92,31 @@ namespace Xaml.Chat.Client.ViewModels
         {
             // TODO: initialize our own views
             this.ViewModels = new List<IPageViewModel>();
-            var loginVM = new LoginRegisterFormViewModel();
-            loginVM.LoginSuccess += this.LoginSuccessful;
             this.ProfileVM = new ProfileViewModel(CurrentUserSetting); 
-            this.LoginRegisterVM = loginVM;
             this.ConversationVM = new ConversationViewModel();
             var registerVM = new RegisterFormViewModel();
             registerVM.RegisterSuccess += this.RegisterSuccessfull;
             this.RegisterFormVM = registerVM;
 
-            this.CurrentViewModel = this.RegisterFormVM;
+            this.GeneralVM = new GeneralViewModel();
+
+            var loginVM = new LoginViewModel();
+            loginVM.LoginSuccess += this.LoginSuccessful;
+            this.LoginVM = loginVM;
+
+            this.CurrentViewModel = this.LoginVM;
         }
 
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
         {
             this.CurrentUserSetting = e.RegisteredUser;
-            this.CurrentViewModel = this.ConversationVM;
+            this.CurrentViewModel = this.GeneralVM;
         }
 
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
-            
+            this.CurrentUserSetting = e.UserSetting;
+            this.CurrentViewModel = this.GeneralVM;
         }
 
         public string Username { get; set; }

@@ -81,8 +81,9 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="ViewModels\ConversationViewModel.cs" />
+    <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
-    <Compile Include="ViewModels\LoginRegisterFormViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -92,8 +93,11 @@
     <Compile Include="Views\EditProfileView.xaml.cs">
       <DependentUpon>EditProfileView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginRegisterFormView.xaml.cs">
-      <DependentUpon>LoginRegisterFormView.xaml</DependentUpon>
+    <Compile Include="Views\GeneralView.xaml.cs">
+      <DependentUpon>GeneralView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginFormView.xaml.cs">
+      <DependentUpon>LoginFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterFormView.xaml.cs">
       <DependentUpon>RegisterFormView.xaml</DependentUpon>
@@ -121,9 +125,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LoginRegisterFormView.xaml">
+    <Page Include="Views\GeneralView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterFormView.xaml">
       <SubType>Designer</SubType>

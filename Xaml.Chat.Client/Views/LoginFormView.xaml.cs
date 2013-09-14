@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Xaml.Chat.Client.Views
 {
     /// <summary>
-    /// Interaction logic for LoginRegisterFormView.xaml
+    /// Interaction logic for LoginFormView.xaml
     /// </summary>
-    public partial class LoginRegisterFormView : UserControl
+    public partial class LoginFormView : UserControl
     {
-        public LoginRegisterFormView()
+        public LoginFormView()
         {
             InitializeComponent();
         }
