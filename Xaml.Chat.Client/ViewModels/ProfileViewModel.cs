@@ -12,7 +12,7 @@ using Xaml.Chat.Client.Data;
 
 namespace Xaml.Chat.Client.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : IPageViewModel
     {
         public UserModel CurrentUserSettings { get; set; }
 
@@ -36,6 +36,14 @@ namespace Xaml.Chat.Client.ViewModels
         //public UserModel NewUserSettings { get; set; }
 
         private ICommand editProfile;
+
+        public string Name
+        {
+            get
+            {
+                return "User profile";
+            }
+        }
 
         public ICommand EditProfile
         {

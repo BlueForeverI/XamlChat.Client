@@ -11,13 +11,7 @@
         <!--<helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>-->
     </UserControl.Resources>
     <DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-            <Button>Home</Button>
-            <Button Command="{Binding GoToProfile}">Edit Profile</Button>
-            <Button Command="{Binding GoToSearhContacts}">
-                Search Contacts
-            </Button>
-        </StackPanel>
+        
         <Grid DockPanel.Dock="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
