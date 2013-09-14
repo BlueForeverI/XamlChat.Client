@@ -46,6 +46,7 @@ namespace Xaml.Chat.Client.ViewModels
         public RegisterFormViewModel RegisterFormVM { get; set; }
         public GeneralViewModel GeneralVM { get; set; }
         public LoginViewModel LoginVM { get; set; }
+        public SearchFormViewModel SearchVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -104,19 +105,23 @@ namespace Xaml.Chat.Client.ViewModels
             loginVM.LoginSuccess += this.LoginSuccessful;
             this.LoginVM = loginVM;
 
+            this.SearchVM = new SearchFormViewModel();
+
             this.CurrentViewModel = this.LoginVM;
         }
 
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
         {
             this.CurrentUserSetting = e.RegisteredUser;
-            this.CurrentViewModel = this.GeneralVM;
+            this.SearchVM.SessionKey = e.RegisteredUser.SessionKey;
+            this.CurrentViewModel = this.SearchVM;
         }
 
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
             this.CurrentUserSetting = e.UserSetting;
-            this.CurrentViewModel = this.GeneralVM;
+            this.SearchVM.SessionKey = e.UserSetting.SessionKey;
+            this.CurrentViewModel = this.SearchVM;
         }
 
         public string Username { get; set; }

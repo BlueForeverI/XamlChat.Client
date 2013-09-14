@@ -86,6 +86,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterFormViewModel.cs" />
+    <Compile Include="ViewModels\SearchFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ConversationView.xaml.cs">
       <DependentUpon>ConversationView.xaml</DependentUpon>
@@ -101,6 +102,9 @@
     </Compile>
     <Compile Include="Views\RegisterFormView.xaml.cs">
       <DependentUpon>RegisterFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchFormView.xaml.cs">
+      <DependentUpon>SearchFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewUserProfileView.xaml.cs">
       <DependentUpon>ViewUserProfileView.xaml</DependentUpon>
@@ -134,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

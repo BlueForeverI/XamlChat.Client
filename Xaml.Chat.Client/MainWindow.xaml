@@ -25,6 +25,10 @@
             DataType="{x:Type ViewModels:LoginViewModel}">
             <Views:LoginFormView/>
         </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:SearchFormViewModel}">
+            <Views:SearchFormView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding Path=CurrentViewModel}" />
