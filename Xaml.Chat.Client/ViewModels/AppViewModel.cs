@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
-using Xaml.Chat.Client.Behavior;
-using Xaml.Chat.Client.Helpers;
-using Xaml.Chat.Client.Models;
-
-namespace Xaml.Chat.Client.ViewModels
+﻿namespace Xaml.Chat.Client.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Input;
+    using Xaml.Chat.Client.Behavior;
+    using Xaml.Chat.Client.Helpers;
+    using Xaml.Chat.Client.Models;
+
     public class AppViewModel : ViewModelBase
     {
         private ICommand changeViewModelCommand;
@@ -15,6 +16,8 @@ namespace Xaml.Chat.Client.ViewModels
         private IPageViewModel currentViewModel;
         private bool loggedInUser = false;
         private ICommand logoutCommand;
+        private ICommand goToSearhContacts;
+        private ICommand goToProfile;
 
         public IPageViewModel CurrentViewModel
         {
@@ -76,6 +79,58 @@ namespace Xaml.Chat.Client.ViewModels
             }
         }
 
+        public ICommand GoToSearhContacts
+        {
+            get
+            {
+                if (this.goToSearhContacts == null)
+                {
+                    this.goToSearhContacts = new RelayCommand(this.HandleGoToSearch);
+                }
+                return this.goToSearhContacts;
+            }
+        }
+
+        public ICommand GoToProfile
+        {
+            get
+            {
+                if (this.goToProfile == null)
+                {
+                    this.goToProfile = new RelayCommand(this.HanddleGoToProfile);
+                }
+                return this.goToProfile;
+            }
+        }
+
+        public ICommand GoToHome
+        {
+            get
+            {
+                if (this.goToHome ==null)
+                {
+                    this.goToHome = new RelayCommand(this.HandleGoToHome);
+                }
+                return this.goToHome;
+            }
+        }
+
+        private void HandleGoToHome(object parameter)
+        {
+            this.CurrentViewModel = this.GeneralVM;
+
+        }
+
+        private void HanddleGoToProfile(object parameter)
+        {
+            this.CurrentViewModel = this.ProfileVM;
+        }
+        private void HandleGoToSearch(object parameter)
+        {
+            //set current to search page
+
+        }
+
         private void HandleLogoutCommand(object parameter)
         {
             // TODO: our own logout logic
@@ -117,8 +172,11 @@ namespace Xaml.Chat.Client.ViewModels
         {
             this.CurrentUserSetting = e.UserSetting;
             this.CurrentViewModel = this.GeneralVM;
+            this.LoggedInUser = true;
         }
 
         public string Username { get; set; }
+
+        public ICommand goToHome { get; set; }
     }
 }

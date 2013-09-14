@@ -117,38 +117,7 @@
             }
         }
 
-        public ICommand GoToSearhContacts
-        {
-            get
-            {
-                if (this.goToSearhContacts == null)
-                {
-                    this.goToSearhContacts = new RelayCommand(this.HandleGoToSearch);
-                }
-                return this.goToSearhContacts;
-            }
-        }
-
-        public ICommand GoToProfile
-        {
-            get
-            {
-                if (this.goToProfile==null)
-                {
-                    this.goToProfile = new RelayCommand(this.HanddleGoToProfile);
-                }
-                return this.goToProfile;
-            }
-        }
-
-        private void HanddleGoToProfile(object parameter)
-        {
-            throw new NotImplementedException();
-        }
-        private void HandleGoToSearch(object parameter)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private void HandleStartConversation(object parameter)
         {
