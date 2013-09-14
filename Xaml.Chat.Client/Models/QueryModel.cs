@@ -1,6 +1,6 @@
 ﻿namespace Xaml.Chat.Client.Models
 {
-    class QueryModel
+    public class QueryModel
     {
         public string QueryText { get; set; }
     }

@@ -13,6 +13,10 @@
             DataType="{x:Type ViewModels:LoginRegisterFormViewModel}">
             <Views:LoginRegisterFormView/>
         </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:ConversationViewModel}">
+            <Views:ConversationView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding Path=CurrentViewModel}" />

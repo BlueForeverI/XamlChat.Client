@@ -1,6 +1,6 @@
 ﻿namespace Xaml.Chat.Client.Models
 {
-   public class UserEditModel
+    public class UserEditModel
     {
         public int Id { get; set; }
 
