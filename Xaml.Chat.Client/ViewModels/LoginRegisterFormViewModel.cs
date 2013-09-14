@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Xaml.Chat.Client.Behavior;
 using Xaml.Chat.Client.Helpers;
+using Xaml.Chat.Client.Models;
 
 namespace Xaml.Chat.Client.ViewModels
 {
@@ -73,13 +75,9 @@ namespace Xaml.Chat.Client.ViewModels
         {
             var passwordBox = parameter as PasswordBox;
             var password = passwordBox.Password;
-            //SHA1 sha = new SHA1CryptoServiceProvider();
-            //var passwordBytes = Encoding.Default.GetBytes(password);
-            //passwordBytes = Encoding.Convert(Encoding.Default,Encoding.UTF8,passwordBytes);
-            //var authenticationCodeBytes = sha.ComputeHash(passwordBytes);
-            //var authenticationCode = Encoding.UTF8.GetString(authenticationCodeBytes);
 
-            var authenticationCode = this.GetSHA1HashData(password);
+          
+            var authenticationCode = Sha1Encrypter.CalculateSHA1(password);
 
             // TODO: our own registration logic
             //DataPersister.RegisterUser(this.Username, this.Email, authenticationCode);
@@ -90,7 +88,7 @@ namespace Xaml.Chat.Client.ViewModels
         {
             var passwordBox = parameter as PasswordBox;
             var password = passwordBox.Password;
-            var authenticationCode = this.GetSHA1HashData(password);
+            var authenticationCode = Sha1Encrypter.CalculateSHA1(password);
 
             // TODO: our own login logic
             //var username = DataPersister.LoginUser(this.Username, authenticationCode);
@@ -101,17 +99,14 @@ namespace Xaml.Chat.Client.ViewModels
             //}
         }
 
-        private string GetSHA1HashData(string data)
-        {
-            return "0123456789012345678901234567890123456789";
-        }
+    
 
 
-        protected void RaiseLoginSuccess(string username)
+        protected void RaiseLoginSuccess(UserModel currUser )
         {
             if (this.LoginSuccess!= null)
             {
-                this.LoginSuccess(this, new LoginSuccessArgs(username));                
+                this.LoginSuccess(this, new LoginSuccessArgs(currUser));                
             }
         }
     }
