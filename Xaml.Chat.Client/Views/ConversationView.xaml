@@ -17,15 +17,19 @@
                      DockPanel.Dock="Top" Height="400" Width="400">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Content}" />
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Path=Sender.Username}" />
+                            <TextBlock Text=": " />
+                            <TextBlock Text="{Binding Content}" />
+                        </WrapPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <WrapPanel DockPanel.Dock="Bottom">
-                <TextBox Text="{Binding Path=MessageToSend.Content}" 
-                         Width="300" FontSize="15" Height="50" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
-                <Button Padding="10" FontSize="20"
-                    Command="{Binding Path=DataContext.ConversationViewModel.SendMessage, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            <WrapPanel DockPanel.Dock="Bottom" Width="400">
+                <TextBox Text="{Binding MessageToSend}" 
+                         Width="330" FontSize="15" Height="50" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                <Button Padding="10" FontSize="20" HorizontalAlignment="Right"
+                    Command="{Binding Path=DataContext.ConversationVM.SendMessage, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                     Content="Send" />
             </WrapPanel>
         </DockPanel>
