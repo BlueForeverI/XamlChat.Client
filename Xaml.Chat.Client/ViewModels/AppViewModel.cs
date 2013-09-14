@@ -44,6 +44,7 @@ namespace Xaml.Chat.Client.ViewModels
 
         public LoginRegisterFormViewModel LoginRegisterVM { get; set; }
         public ConversationViewModel ConversationVM { get; set; }
+        public RegisterFormViewModel RegisterFormVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -101,10 +102,18 @@ namespace Xaml.Chat.Client.ViewModels
             var loginVM = new LoginRegisterFormViewModel();
             loginVM.LoginSuccess += this.LoginSuccessful;
             this.ProfileVM = new ProfileViewModel(CurrentUserSetting); 
-
-
             this.LoginRegisterVM = loginVM;
             this.ConversationVM = new ConversationViewModel();
+            var registerVM = new RegisterFormViewModel();
+            registerVM.RegisterSuccess += this.RegisterSuccessfull;
+            this.RegisterFormVM = registerVM;
+
+            this.CurrentViewModel = this.RegisterFormVM;
+        }
+
+        private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
+        {
+            this.CurrentUserSetting = e.RegisteredUser;
             this.CurrentViewModel = this.ConversationVM;
         }
 

@@ -10,8 +10,8 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate            
-            DataType="{x:Type ViewModels:LoginRegisterFormViewModel}">
-            <Views:LoginRegisterFormView/>
+            DataType="{x:Type ViewModels:RegisterFormViewModel}">
+            <Views:RegisterFormView/>
         </DataTemplate>
         <DataTemplate            
             DataType="{x:Type ViewModels:ConversationViewModel}">
