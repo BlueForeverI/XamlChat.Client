@@ -66,9 +66,9 @@
     <Compile Include="Data\HttpRequester.cs" />
     <Compile Include="Data\MessagePersister.cs" />
     <Compile Include="Data\UserPersister.cs" />
-    <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\LoginSuccessArgs.cs" />
     <Compile Include="Helpers\PubnubAPI.cs" />
+    <Compile Include="Helpers\RegisterSuccessArgs.cs" />
     <Compile Include="Helpers\Sha1Encrypter.cs" />
     <Compile Include="Models\ContactRequestModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
@@ -83,8 +83,9 @@
     <Compile Include="ViewModels\ConversationViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
-    <Compile Include="ViewModels\LoginRegisterFormViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\RegisterFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ConversationView.xaml.cs">
       <DependentUpon>ConversationView.xaml</DependentUpon>
@@ -95,8 +96,11 @@
     <Compile Include="Views\GeneralView.xaml.cs">
       <DependentUpon>GeneralView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginRegisterFormView.xaml.cs">
-      <DependentUpon>LoginRegisterFormView.xaml</DependentUpon>
+    <Compile Include="Views\LoginFormView.xaml.cs">
+      <DependentUpon>LoginFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterFormView.xaml.cs">
+      <DependentUpon>RegisterFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewUserProfileView.xaml.cs">
       <DependentUpon>ViewUserProfileView.xaml</DependentUpon>
@@ -125,9 +129,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LoginRegisterFormView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\LoginFormView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ViewUserProfileView.xaml">
       <Generator>MSBuild:Compile</Generator>

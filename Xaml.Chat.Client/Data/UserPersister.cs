@@ -21,7 +21,7 @@
             };
 
             UserModel loggedUser = HttpRequester.
-                Post<UserModel>(baseUrl + "user/login", user);
+                Post<UserModel>(baseUrl + "users/login", user);
 
             return loggedUser;
         }
@@ -32,7 +32,7 @@
             ValidateAuthCode(newUser.PasswordHash);
 
             UserModel registeredUser = HttpRequester.
-                Post<UserModel>(baseUrl + "user/register", newUser);
+                Post<UserModel>(baseUrl + "users/register", newUser);
 
             return registeredUser;
         }
@@ -50,7 +50,7 @@
             ValidateAuthCode(editedUser.NewPasswordHash);
             headers[HttpRequester.sessionKeyHeaderName] = sessionKey;
             UserModel result = HttpRequester.
-                Post<UserModel>(baseUrl + "user/edit", editedUser,headers);
+                Post<UserModel>(baseUrl + "users/edit", editedUser,headers);
 
             return result;
         }
@@ -58,7 +58,7 @@
         public static IEnumerable<UserModel> Search(string sessionKey, QueryModel query)
         {
             headers[HttpRequester.sessionKeyHeaderName] = sessionKey;
-            return HttpRequester.Post<IEnumerable<UserModel>>(baseUrl + "search", query, headers);
+            return HttpRequester.Post<IEnumerable<UserModel>>(baseUrl + "users/search", query, headers);
         }
 
         private static void ValidateUsername(string userName)

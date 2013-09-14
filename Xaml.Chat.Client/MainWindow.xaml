@@ -10,16 +10,20 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate            
-            DataType="{x:Type ViewModels:LoginRegisterFormViewModel}">
-            <Views:LoginRegisterFormView/>
+            DataType="{x:Type ViewModels:RegisterFormViewModel}">
+            <Views:RegisterFormView/>
         </DataTemplate>
         <DataTemplate            
             DataType="{x:Type ViewModels:ConversationViewModel}">
             <Views:ConversationView/>
         </DataTemplate>
-        <DataTemplate 
+        <DataTemplate            
             DataType="{x:Type ViewModels:GeneralViewModel}">
             <Views:GeneralView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:LoginViewModel}">
+            <Views:LoginFormView/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
