@@ -12,28 +12,26 @@ using Xaml.Chat.Client.Data;
 
 namespace Xaml.Chat.Client.ViewModels
 {
-    public class ProfileViewModel : IPageViewModel
+    public class ProfileViewModel : ViewModelBase, IPageViewModel
     {
         public UserModel CurrentUserSettings { get; set; }
 
         public ProfileViewModel(UserModel currentUserSettings)
         {
-            this.CurrentUserSettings = currentUserSettings;            
+            this.CurrentUserSettings = currentUserSettings;
+            this.Username = currentUserSettings.Username;
+            this.LastName = currentUserSettings.LastName;
+            this.FirstName = currentUserSettings.FirstName;
+            this.ProfilePictureUrl = currentUserSettings.ProfilePictureUrl;
         }
 
         public string Username { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public string ProfilePictureUrl { get; set; }
-
         public string OldPassword { get; set; }
-
         public string NewPassword { get; set; }
 
-        //public UserModel NewUserSettings { get; set; }
 
         private ICommand editProfile;
 
@@ -59,26 +57,34 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleEditProfileCommand(object parameter)
         {
-            var editProfile = new UserEditModel()
-            {
-                Id = CurrentUserSettings.Id,
-                Username = Username,
-                OldPasswordHash = Sha1Encrypter.CalculateSHA1(OldPassword),
-                NewPasswordHash = Sha1Encrypter.CalculateSHA1(NewPassword),
-                FirstName = FirstName,
-                LastName = LastName,
-                ProfilePictureUrl = ProfilePictureUrl
-            };
 
-            try
+            if (this.NewPassword == null || this.NewPassword.Length < 2)
             {
-               this.CurrentUserSettings=UserPersister.EditUser(CurrentUserSettings.SessionKey, editProfile);
+                MessageBox.Show("Invalid new Password");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Problems editing the profile"); 
-            }
+                try
+                {
+                    var editProfile = new UserEditModel()
+                    {
+                        Id = CurrentUserSettings.Id,
+                        Username = Username,
+                        OldPasswordHash = Sha1Encrypter.CalculateSHA1(OldPassword),
+                        NewPasswordHash = Sha1Encrypter.CalculateSHA1(NewPassword),
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        ProfilePictureUrl = ProfilePictureUrl
+                    };
+                    this.CurrentUserSettings = UserPersister.EditUser(CurrentUserSettings.SessionKey, editProfile);
+                    this.NewPassword = "";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Problems editing the profile");
+                }
 
+            }
         }
     }
 }
