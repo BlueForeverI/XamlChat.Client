@@ -105,7 +105,8 @@ namespace Xaml.Chat.Client.ViewModels
 
             this.LoginRegisterVM = loginVM;
             this.ConversationVM = new ConversationViewModel();
-            this.CurrentViewModel = this.ConversationVM;
+            this.GeneralVM  = new GeneralViewModel();
+            this.CurrentViewModel = this.GeneralVM;
         }
 
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
@@ -114,5 +115,7 @@ namespace Xaml.Chat.Client.ViewModels
         }
 
         public string Username { get; set; }
+
+        public GeneralViewModel GeneralVM { get; set; }
     }
 }
