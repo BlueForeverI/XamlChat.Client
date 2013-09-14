@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Xaml.Chat.Client.Models;
-
+        
     public class UserPersister
     {
         private static string baseUrl = "http://xamlchat.apphb.com/api/";
@@ -39,9 +39,10 @@
         public static void LogoutUser(string sessionKey)
         {
             IDictionary<string,string> headers = new Dictionary<string,string>();
-            headers["X-sessionKey"]=sessionKey;
+            headers[HttpRequester.sessionKeyHeaderName]=sessionKey;
             HttpRequester.Get(baseUrl + "users/logout", headers);
         }
+        
         private static void ValidateUsername(string userName)
         {
             if (String.IsNullOrEmpty(userName))            

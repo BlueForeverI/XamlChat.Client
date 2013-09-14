@@ -9,6 +9,7 @@
 
     class HttpRequester
     {
+        public const string sessionKeyHeaderName = "X-sessionKey";
         public static T Get<T>(string resourceUrl, IDictionary<string, string> headers = null)
         {
             var request = WebRequest.Create(resourceUrl) as HttpWebRequest;
