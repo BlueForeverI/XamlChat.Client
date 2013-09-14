@@ -1,0 +1,1 @@
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\bin\Debug\Xaml.Chat.Client.exe.config
