@@ -40,6 +40,7 @@ namespace Xaml.Chat.Client.ViewModels
         }
 
         public LoginRegisterFormViewModel LoginRegisterVM { get; set; }
+        public ConversationViewModel ConversationVM { get; set; }
 
         public List<IPageViewModel> ViewModels { get; set; }
 
@@ -95,7 +96,8 @@ namespace Xaml.Chat.Client.ViewModels
             var loginVM = new LoginRegisterFormViewModel();
             loginVM.LoginSuccess += this.LoginSuccessful;
             this.LoginRegisterVM = loginVM;
-            this.CurrentViewModel = this.LoginRegisterVM;
+            this.ConversationVM = new ConversationViewModel();
+            this.CurrentViewModel = this.ConversationVM;
         }
 
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
