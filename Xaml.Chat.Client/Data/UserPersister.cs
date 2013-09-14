@@ -42,7 +42,18 @@
             headers[HttpRequester.sessionKeyHeaderName]=sessionKey;
             HttpRequester.Get(baseUrl + "users/logout", headers);
         }
-        
+
+        public static UserModel EditUser(string sessionKey, UserEditModel editedUser)
+        {
+            ValidateUsername(editedUser.Username);
+            ValidateAuthCode(editedUser.NewPasswordHash);
+
+            UserModel result = HttpRequester.
+                Post<UserModel>(baseUrl + "user/edit", editedUser);
+
+            return result;
+        }
+
         private static void ValidateUsername(string userName)
         {
             if (String.IsNullOrEmpty(userName))            
