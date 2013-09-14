@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Xaml.Chat.Client.Behavior;
 using Xaml.Chat.Client.Helpers;
+using Xaml.Chat.Client.Models;
 
 namespace Xaml.Chat.Client.ViewModels
 {
@@ -101,11 +102,11 @@ namespace Xaml.Chat.Client.ViewModels
     
 
 
-        protected void RaiseLoginSuccess(string username)
+        protected void RaiseLoginSuccess(UserModel currUser )
         {
             if (this.LoginSuccess!= null)
             {
-                this.LoginSuccess(this, new LoginSuccessArgs(username));                
+                this.LoginSuccess(this, new LoginSuccessArgs(currUser));                
             }
         }
     }
