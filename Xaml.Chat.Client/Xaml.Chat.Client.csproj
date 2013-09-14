@@ -58,8 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\ContactsPersister.cs" />
     <Compile Include="Data\HttpRequester.cs" />
     <Compile Include="Data\UserPersister.cs" />
+    <Compile Include="Models\ContactRequestModel.cs" />
     <Compile Include="Models\LogUserModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\UserModel.cs" />
