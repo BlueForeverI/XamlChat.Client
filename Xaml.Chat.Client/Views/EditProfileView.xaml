@@ -13,7 +13,7 @@
                        Width="120"
                        Height="120"/>
                 <Button Content="Change Picture"
-                        Margin="5"/>
+                        Margin="2"/>
             </StackPanel>
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Stretch"
@@ -26,40 +26,55 @@
                            FontSize="16"/>
             </StackPanel>            
         </StackPanel>
-        <UniformGrid Rows="3" Columns="3" Margin="10">
-            <TextBlock Text="Password "
+        <UniformGrid Rows="5" Columns="2" Margin="2">
+            <TextBlock Text="Old Password "
                        Grid.Row="0" Grid.Column="0"
-                       FontSize="16"
+                       FontSize="14"
                        FontWeight="Bold"
-                       Margin="5"/>
-            <TextBox Text="{Binding Password}"
+                       Margin="2"/>
+            <TextBox Text="{Binding OldPassword}"
                        Grid.Row="0" Grid.Column="1"
-                       FontSize="16"
-                       Margin="5"/>
-            <Button Content="Change"
-                    Margin="5"/>
+                       FontSize="14"
+                       Margin="2"/>
+            <TextBlock Text="New Password "
+                       Grid.Row="0" Grid.Column="0"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="2"/>
+            <TextBox Text="{Binding NewPassword}"
+                       Grid.Row="0" Grid.Column="1"
+                       FontSize="14"
+                       Margin="2"/>
+            <TextBlock Text="Confirm Password "
+                       Grid.Row="0" Grid.Column="0"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="2"/>
+            <TextBox   Grid.Row="0" Grid.Column="1"
+                       FontSize="14"
+                       Margin="2"/>            
             <TextBlock Text="First Name "
                        Grid.Row="0" Grid.Column="0"
-                       FontSize="16"
+                       FontSize="14"
                        FontWeight="Bold"
-                       Margin="5"/>
+                       Margin="2"/>
             <TextBox Text="{Binding FirstName}"
                        Grid.Row="0" Grid.Column="1"
-                       FontSize="16"
-                       Margin="5"/>
-            <Button Content="Change"
-                    Margin="5"/>
+                       FontSize="14"
+                       Margin="2"/>
             <TextBlock Text="Last Name "
                        Grid.Row="0" Grid.Column="0"
-                       FontSize="16"
+                       FontSize="14"
                        FontWeight="Bold"
-                       Margin="5"/>
+                       Margin="2"/>
             <TextBox Text="{Binding LastName}"
                        Grid.Row="0" Grid.Column="1"
-                       FontSize="16"
-                       Margin="5"/>
-            <Button Content="Change"
-                    Margin="5"/>
+                       FontSize="14"
+                       Margin="2"/>
         </UniformGrid>
+        <Button Content="Save Changes"
+                Width="100"
+                HorizontalAlignment="Right"
+                Margin="0,0,10,10"/>
     </StackPanel>
 </UserControl>
