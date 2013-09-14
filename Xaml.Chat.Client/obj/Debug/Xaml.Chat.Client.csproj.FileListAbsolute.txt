@@ -7,3 +7,13 @@ D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client
 D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Xaml.Chat.Client.g.resources
 D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Xaml.Chat.Client.Properties.Resources.resources
 D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Xaml.Chat.Client.csproj.GenerateResource.Cache
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\LoginRegisterFormView.g.cs
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Xaml.Chat.Client_MarkupCompile.lref
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\bin\Debug\Xaml.Chat.Client.exe
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\bin\Debug\Xaml.Chat.Client.pdb
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\bin\Debug\Newtonsoft.Json.dll
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\bin\Debug\Newtonsoft.Json.xml
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\LoginRegisterFormView.baml
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Xaml.Chat.Client.exe
+D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Xaml.Chat.Client.pdb

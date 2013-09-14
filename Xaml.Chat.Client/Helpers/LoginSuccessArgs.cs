@@ -1,15 +1,16 @@
 ﻿using System;
+using Xaml.Chat.Client.Models;
 
 namespace Xaml.Chat.Client.Helpers
 {
     public class LoginSuccessArgs:EventArgs
     {
-        public string Username { get; set; }
+        public UserModel UserSetting { get; set; }
 
-        public LoginSuccessArgs(string username)
+        public LoginSuccessArgs(UserModel userSettings)
             : base()
         {
-            this.Username = username;
+            this.UserSetting = userSettings;
         }
     }
 }
