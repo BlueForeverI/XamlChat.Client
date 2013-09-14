@@ -148,7 +148,7 @@
         {
             // TODO: initialize our own views
             this.ViewModels = new List<IPageViewModel>();
-            this.ProfileVM = new ProfileViewModel(CurrentUserSetting); 
+            this.ProfileVM = new ProfileViewModel(new UserModel()); 
             this.ConversationVM = new ConversationViewModel();
             var registerVM = new RegisterFormViewModel();
             registerVM.RegisterSuccess += this.RegisterSuccessfull;

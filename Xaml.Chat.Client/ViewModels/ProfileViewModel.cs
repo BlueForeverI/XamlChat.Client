@@ -23,6 +23,11 @@ namespace Xaml.Chat.Client.ViewModels
             this.LastName = currentUserSettings.LastName;
             this.FirstName = currentUserSettings.FirstName;
             this.ProfilePictureUrl = currentUserSettings.ProfilePictureUrl;
+
+            OnPropertyChanged("Username");
+            OnPropertyChanged("LastName");
+            OnPropertyChanged("FirstName");
+            OnPropertyChanged("ProfilePictureUrl");
         }
 
         public string Username { get; set; }
@@ -76,8 +81,10 @@ namespace Xaml.Chat.Client.ViewModels
                         LastName = LastName,
                         ProfilePictureUrl = ProfilePictureUrl
                     };
+
                     this.CurrentUserSettings = UserPersister.EditUser(CurrentUserSettings.SessionKey, editProfile);
                     this.NewPassword = "";
+                    MessageBox.Show("Profile changed");
                 }
                 catch (Exception ex)
                 {
