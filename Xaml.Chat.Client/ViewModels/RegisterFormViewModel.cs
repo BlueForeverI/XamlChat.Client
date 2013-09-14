@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Win32;
 using Xaml.Chat.Client.Behavior;
 using Xaml.Chat.Client.Data;
 using Xaml.Chat.Client.Helpers;
@@ -20,6 +21,7 @@ namespace Xaml.Chat.Client.ViewModels
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ProfilePictureUrl { get; set; }
 
         private ICommand register;
         public ICommand Register
@@ -32,6 +34,32 @@ namespace Xaml.Chat.Client.ViewModels
                 }
 
                 return this.register;
+            }
+        }
+
+        private ICommand selectProfilePicture;
+        public ICommand SelectProfilePicture
+        {
+            get
+            {
+                if(this.selectProfilePicture == null)
+                {
+                    this.selectProfilePicture = new RelayCommand(HandleSelectProfilePicture);
+                }
+
+                return this.selectProfilePicture;
+            }
+        }
+
+        private void HandleSelectProfilePicture(object parameter)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if(dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                var url = ImageUploader.UploadImage(filePath);
+                ProfilePictureUrl = url;
+                OnPropertyChanged("ProfilePictureUrl");
             }
         }
 
@@ -60,8 +88,7 @@ namespace Xaml.Chat.Client.ViewModels
                     PasswordHash = passwordHash,
                     FirstName = this.FirstName,
                     LastName = this.LastName,
-                    ProfilePictureUrl =
-                        "http://images1.wikia.nocookie.net/__cb20120325053014/mugen/images/6/6f/Spiderman.png"
+                    ProfilePictureUrl = this.ProfilePictureUrl
                 });
 
                 RaiseRegisterSuccess(registeredUser);

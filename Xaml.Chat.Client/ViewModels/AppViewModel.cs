@@ -107,7 +107,7 @@ namespace Xaml.Chat.Client.ViewModels
 
             this.SearchVM = new SearchFormViewModel();
 
-            this.CurrentViewModel = this.LoginVM;
+            this.CurrentViewModel = this.RegisterFormVM;
         }
 
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
