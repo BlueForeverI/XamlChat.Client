@@ -7,7 +7,7 @@
     public class UserPersister
     {
         private static string baseUrl = "http://xamlchat.apphb.com/api/";
-        private static IDictionary<string, string> headers;
+        private static IDictionary<string, string> headers = new Dictionary<string,string>();
 
         public static UserModel LoginUser(string userName, string authCode)
         {
