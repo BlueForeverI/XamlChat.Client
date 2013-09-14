@@ -7,6 +7,7 @@
     public class UserPersister
     {
         private static string baseUrl = "http://xamlchat.apphb.com/api/";
+        private static IDictionary<string, string> headers;
 
         public static UserModel LoginUser(string userName, string authCode)
         {
@@ -47,11 +48,17 @@
         {
             ValidateUsername(editedUser.Username);
             ValidateAuthCode(editedUser.NewPasswordHash);
-
+            headers[HttpRequester.sessionKeyHeaderName] = sessionKey;
             UserModel result = HttpRequester.
-                Post<UserModel>(baseUrl + "user/edit", editedUser);
+                Post<UserModel>(baseUrl + "user/edit", editedUser,headers);
 
             return result;
+        }
+
+        public static IEnumerable<UserModel> Search(string sessionKey, QueryModel query)
+        {
+            headers[HttpRequester.sessionKeyHeaderName] = sessionKey;
+            return HttpRequester.Post<IEnumerable<UserModel>>(baseUrl + "search", query, headers);
         }
 
         private static void ValidateUsername(string userName)
