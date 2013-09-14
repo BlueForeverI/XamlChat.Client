@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\
+E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\
 Xaml.Chat.Client
 none
 false
 DEBUG;TRACE
-D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\App.xaml
-21947676049
+E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\App.xaml
+3-697706635
 
-28-149797700
-13736083348
-MainWindow.xaml;Views\LoginRegisterFormView.xaml;
+33-660583245
+15-135761896
+MainWindow.xaml;Views\ConversationView.xaml;Views\LoginRegisterFormView.xaml;
 
 False
 

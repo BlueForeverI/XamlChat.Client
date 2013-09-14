@@ -2,12 +2,15 @@
 using System.Windows.Input;
 using Xaml.Chat.Client.Behavior;
 using Xaml.Chat.Client.Helpers;
+using Xaml.Chat.Client.Models;
 
 namespace Xaml.Chat.Client.ViewModels
 {
     public class AppViewModel : ViewModelBase
     {
         private ICommand changeViewModelCommand;
+
+        public UserModel CurrentUserSetting { get; set; }
 
         private IPageViewModel currentViewModel;
         private bool loggedInUser = false;
@@ -41,6 +44,8 @@ namespace Xaml.Chat.Client.ViewModels
 
         public LoginRegisterFormViewModel LoginRegisterVM { get; set; }
         public ConversationViewModel ConversationVM { get; set; }
+
+        public ProfileViewModel ProfileVM { get; set; }
 
         public List<IPageViewModel> ViewModels { get; set; }
 
@@ -95,6 +100,9 @@ namespace Xaml.Chat.Client.ViewModels
             this.ViewModels = new List<IPageViewModel>();
             var loginVM = new LoginRegisterFormViewModel();
             loginVM.LoginSuccess += this.LoginSuccessful;
+            this.ProfileVM = new ProfileViewModel(CurrentUserSetting); 
+
+
             this.LoginRegisterVM = loginVM;
             this.ConversationVM = new ConversationViewModel();
             this.CurrentViewModel = this.ConversationVM;
@@ -102,10 +110,7 @@ namespace Xaml.Chat.Client.ViewModels
 
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
-            //this.Username = e.Username;
-            //this.LoggedInUser = true;
-            //this.HandleChangeViewModelCommand(this.ViewModels[0]);
-            // TODO: our own login success handler
+            
         }
 
         public string Username { get; set; }
