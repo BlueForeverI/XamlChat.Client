@@ -16,8 +16,9 @@ namespace Xaml.Chat.Client.Helpers
         /// <param name="text">input string</param>
         /// <param name="enc">Character encoding</param>
         /// <returns>SHA1 hash</returns>
-        public static string CalculateSHA1(string text, Encoding enc=new ASCIIEncoding())
+        public static string CalculateSHA1(string text)
         {
+            Encoding enc = new ASCIIEncoding();
             // Convert the input string to a byte array
             byte[] buffer = enc.GetBytes(text);
 
