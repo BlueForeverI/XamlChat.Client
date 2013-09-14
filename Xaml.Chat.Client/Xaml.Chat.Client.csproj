@@ -68,6 +68,7 @@
     <Compile Include="Data\UserPersister.cs" />
     <Compile Include="Helpers\LoginSuccessArgs.cs" />
     <Compile Include="Helpers\PubnubAPI.cs" />
+    <Compile Include="Helpers\Sha1Encrypter.cs" />
     <Compile Include="Models\ContactRequestModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\LogUserModel.cs" />
@@ -81,12 +82,19 @@
     <Compile Include="ViewModels\ConversationViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterFormViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ConversationView.xaml.cs">
       <DependentUpon>ConversationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditProfileView.xaml.cs">
+      <DependentUpon>EditProfileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginRegisterFormView.xaml.cs">
       <DependentUpon>LoginRegisterFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewUserProfileView.xaml.cs">
+      <DependentUpon>ViewUserProfileView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,7 +112,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\EditProfileView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\LoginRegisterFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ViewUserProfileView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

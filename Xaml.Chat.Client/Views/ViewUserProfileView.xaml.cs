@@ -18,7 +18,7 @@ namespace Xaml.Chat.Client.Views
     /// <summary>
     /// Interaction logic for ViewUserProfileView.xaml
     /// </summary>
-    public partial class ViewUserProfileView : Page
+    public partial class ViewUserProfileView : UserControl
     {
         public ViewUserProfileView()
         {
