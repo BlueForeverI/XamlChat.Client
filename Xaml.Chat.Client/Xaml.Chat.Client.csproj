@@ -60,21 +60,22 @@
     </ApplicationDefinition>
     <Compile Include="Behavior\RelayCommand.cs" />
     <Compile Include="Data\ContactsPersister.cs" />
+    <Compile Include="Data\ConversationsPersister.cs" />
     <Compile Include="Data\HttpRequester.cs" />
+    <Compile Include="Data\MessagePersister.cs" />
     <Compile Include="Data\UserPersister.cs" />
     <Compile Include="Helpers\LoginSuccessArgs.cs" />
     <Compile Include="Models\ContactRequestModel.cs" />
+    <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\LogUserModel.cs" />
+    <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\MissedConversationModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
-    <Compile Include="ViewModels\ConversationViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\ConversationView.xaml.cs">
-      <DependentUpon>ConversationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginRegisterFormView.xaml.cs">
       <DependentUpon>LoginRegisterFormView.xaml</DependentUpon>
     </Compile>
@@ -90,10 +91,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ConversationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\LoginRegisterFormView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
