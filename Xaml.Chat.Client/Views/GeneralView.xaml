@@ -5,11 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="600"
-             xmlns:local="clr-namespace:Xaml.Chat.Client.ViewModels">    
+             xmlns:local="clr-namespace:Xaml.Chat.Client.ViewModels"
+             xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers">
+    <UserControl.Resources>
+        <helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+    </UserControl.Resources>
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
             <Button>Home</Button>
-            <Button>Edit Profile</Button>
+            <Button Command="{Binding GoToProfile}">Edit Profile</Button>
+            <Button Command="{Binding GoToSearhContacts}">
+                Search Contacts
+            </Button>
         </StackPanel>
         <Grid DockPanel.Dock="Left">
             <Grid.RowDefinitions>
@@ -38,26 +45,34 @@
                             <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                                    Width="50" Height="50" Source="{Binding ProfilePictureUrl}"/>
                             <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Username}"/>
-                            <TextBlock Grid.Column="1" Grid.Row="1" Text="IsOnline"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="Online"
+                                       Visibility="{Binding Online, 
+                                Converter={StaticResource boolToVisibilityConverter}}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Grid.Row="2" Grid.Column="0">Start Conversation</Button>
-            <Button Grid.Row="2" Grid.Column="1">View Profile</Button>
+            <Button Grid.Row="2" Grid.Column="0"
+                    Command="{Binding StartConversation}">Start Conversation</Button>
+            <Button Grid.Row="2" Grid.Column="1"
+                    Command="{Binding ViewProfile}">View Profile</Button>
+         
         </Grid>
         <TabControl DockPanel.Dock="Right" ItemsSource="{Binding Conversations}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Username}"></TextBlock>
-                        <Button>X</Button>
+
+                        <Button CommandParameter="{Binding}"
+                            Command="{Binding Path=DataContext.CloseConversation, 
+                            RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}">X</Button>
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    
+
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
