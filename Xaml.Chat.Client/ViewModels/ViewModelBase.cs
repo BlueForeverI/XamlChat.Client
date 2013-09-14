@@ -1,9 +1,8 @@
-﻿namespace Xaml.Chat.Client.ViewModels
-{
-    using System;
-    using System.ComponentModel;
+﻿using System.ComponentModel;
 
-    public abstract class ViewModelBase : INotifyPropertyChanged
+namespace Xaml.Chat.Client.ViewModels
+{
+    public abstract class ViewModelBase:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
