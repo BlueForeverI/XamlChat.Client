@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Xaml.Chat.Client.Models;
-        
+   
     public class UserPersister
     {
         private static string baseUrl = "http://xamlchat.apphb.com/api/";
