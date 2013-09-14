@@ -4,7 +4,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ViewModels="clr-namespace:Xaml.Chat.Client.ViewModels" 
-        Title="XAML Chat" Height="350" Width="525"   
+        Title="XAML Chat" SizeToContent="WidthAndHeight" MinWidth="300" MinHeight="300"
     xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers">
 
     
@@ -33,6 +33,10 @@
         <DataTemplate            
             DataType="{x:Type ViewModels:SearchFormViewModel}">
             <Views:SearchFormView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:ProfileViewModel}">
+            <Views:EditProfile/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
