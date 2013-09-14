@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xaml.Chat.Client.Behavior;
@@ -27,7 +28,9 @@ namespace Xaml.Chat.Client.ViewModels
             channelName = string.Format("channel-{0}-{1}",
                                                minId, maxId);
 
-            pubnub.Subscribe(channelName, HandleNewMessageReceived);
+            Thread t = new Thread(() =>
+                                  pubnub.Subscribe(channelName, HandleNewMessageReceived));
+            t.Start();
         }
 
         private bool HandleNewMessageReceived(object message)
