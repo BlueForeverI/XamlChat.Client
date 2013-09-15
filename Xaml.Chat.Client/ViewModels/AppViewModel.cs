@@ -146,7 +146,13 @@
         private void HanddleGoToProfile(object parameter)
         {
             this.ProfileVM = new ProfileViewModel(this.CurrentUserSetting);
+            this.ProfileVM.EditSuccess += HandleProfileEditSuccess;
             this.CurrentViewModel = this.ProfileVM;
+        }
+
+        private void HandleProfileEditSuccess(object sender, LoginSuccessArgs e)
+        {
+            this.CurrentUserSetting = e.UserSetting;
         }
 
         private void HandleGoToSearch(object parameter)
@@ -170,7 +176,7 @@
         {
             // TODO: initialize our own views
             this.ViewModels = new List<IPageViewModel>();
-            this.ProfileVM = new ProfileViewModel(new UserModel()); 
+            //this.ProfileVM = new ProfileViewModel(new UserModel()); 
             var registerVM = new RegisterFormViewModel();
             registerVM.RegisterSuccess += this.RegisterSuccessfull;
             this.RegisterFormVM = registerVM;

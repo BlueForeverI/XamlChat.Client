@@ -77,7 +77,7 @@ namespace Xaml.Chat.Client.ViewModels
             
         }
 
-        public event EventHandler<LoginSuccessArgs> EditSuccess = delegate { };
+        public event EventHandler<LoginSuccessArgs> EditSuccess;
 
         public void RaiseEditSuccess(UserModel newUserSetting)
         {
