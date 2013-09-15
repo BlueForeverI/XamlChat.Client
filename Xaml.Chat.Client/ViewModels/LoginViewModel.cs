@@ -52,7 +52,7 @@ namespace Xaml.Chat.Client.ViewModels
                 var loggedUser = UserPersister.LoginUser(this.Username, passwordHash);
                 RaiseLoginSuccess(loggedUser);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Not successfull!");
             }

@@ -20,7 +20,7 @@
             }
         }
 
-        private string sessionKey;
+        public string SessionKey { get; set; }
 
         private ObservableCollection<MissedConversationModel> conversations;
 
@@ -30,8 +30,6 @@
         private ICommand closeConversation;
         private ICommand viewProfile;
         private ICommand startConversation;
-        private ICommand goToSearhContacts;
-        private ICommand goToProfile;
 
         public IEnumerable<MissedConversationModel> Conversations
         {
@@ -39,7 +37,7 @@
             {
                 if (this.conversations == null)
                 {
-                    this.Conversations = ConversationsPersister.GetMissed(sessionKey, this.currentUser.Id);
+                    this.Conversations = ConversationsPersister.GetMissed(SessionKey, this.currentUser.Id);
                 }
                 return this.conversations;
             }
@@ -57,29 +55,7 @@
             }
         }
 
-        public IEnumerable<UserModel> Contacts
-        {
-            get
-            {
-                if (this.contacts == null)
-                {
-                    this.Contacts = ContactsPersister.GetAllContacts(sessionKey);
-                }
-                return this.contacts;
-            }
-            set
-            {
-                if (this.contacts == null)
-                {
-                    this.contacts = new ObservableCollection<UserModel>();
-                }
-                this.contacts.Clear();
-                foreach (var item in value)
-                {
-                    this.contacts.Add(item);
-                }
-            }
-        }
+        public IEnumerable<UserModel> Contacts { get; set; }
 
         public ICommand CloseConversation
         {
@@ -124,7 +100,7 @@
             var view = CollectionViewSource.GetDefaultView(this.contacts);
             UserModel selectedUser = view.CurrentItem as UserModel;
             //TODO: Does it work with the services
-            var newConversation = ConversationsPersister.Start(sessionKey, new ConversationModel()
+            var newConversation = ConversationsPersister.Start(SessionKey, new ConversationModel()
             {
                 SecondUser = selectedUser,
             });
@@ -147,29 +123,14 @@
 
         public GeneralViewModel()
         {
-            //this.conversations = new ObservableCollection<MissedConversationModel>()
-            //{
-            //    new MissedConversationModel()
-            //    {
-            //        Username="Stamat",
-            //    },
-            //    new MissedConversationModel()
-            //    {
-            //        Username="Mira"
-            //    }
-            //};
-            //this.contacts = new ObservableCollection<UserModel>()
-            //{
-            //    new UserModel()
-            //    {
-            //        Username="Contact 1",
-            //        ProfilePictureUrl="http://images2.fanpop.com/image/photos/9600000/Batman-Logo-batman-9683803-1280-1024.jpg"
-            //    },
-            //    new UserModel()
-            //    {
-            //        Username="Contact 2"
-            //    }
-            //};
+            this.Contacts = new List<UserModel>();
+        }
+
+        public GeneralViewModel(string sessionKey)
+        {
+            this.SessionKey = sessionKey;
+            this.Contacts = ContactsPersister.GetAllContacts(this.SessionKey);
+            OnPropertyChanged("Contacts");
         }
     }
 }

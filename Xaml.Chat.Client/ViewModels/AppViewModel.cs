@@ -148,6 +148,7 @@
             this.ProfileVM = new ProfileViewModel(this.CurrentUserSetting);
             this.CurrentViewModel = this.ProfileVM;
         }
+
         private void HandleGoToSearch(object parameter)
         {
             this.CurrentViewModel = this.SearchVM;
@@ -191,6 +192,7 @@
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
         {
             this.CurrentUserSetting = e.RegisteredUser;
+            this.GeneralVM = new GeneralViewModel(e.RegisteredUser.SessionKey);
             this.CurrentViewModel = this.GeneralVM;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
         }
@@ -198,6 +200,7 @@
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
             this.CurrentUserSetting = e.UserSetting;
+            this.GeneralVM = new GeneralViewModel(e.UserSetting.SessionKey);
             this.CurrentViewModel = this.GeneralVM;
             this.LoggedInUser = true;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
