@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behavior\CommandsBehavior.cs" />
     <Compile Include="Behavior\RelayCommand.cs" />
     <Compile Include="Data\ContactsPersister.cs" />
     <Compile Include="Data\ConversationsPersister.cs" />

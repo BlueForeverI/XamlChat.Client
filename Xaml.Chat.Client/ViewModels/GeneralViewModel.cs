@@ -34,6 +34,20 @@
         private ICommand closeConversation;
         private ICommand viewProfile;
         private ICommand startConversation;
+        private string searchText;
+
+        public string SearchText
+        {
+            get
+            {
+                return searchText;
+            }
+            set
+            {
+                this.searchText = value;
+                HandleTextChanged(value);
+            }
+        }
 
         public IEnumerable<MissedConversationModel> Conversations
         {
@@ -65,8 +79,8 @@
             {
                 if (this.contacts == null)
                 {
-                    this.Contacts = ContactsPersister.GetAllContacts(sessionKey);
-                    this.allContacts = this.Contacts;
+                    this.allContacts = ContactsPersister.GetAllContacts(sessionKey);
+                    this.Contacts = allContacts;
                 }
                 return this.contacts;
             }
@@ -119,12 +133,16 @@
                 return this.startConversation;
             }
         }
-
+        
         private void HandleStartConversation(object parameter)
         {
             var view = CollectionViewSource.GetDefaultView(this.contacts);
             UserModel selectedUser = view.CurrentItem as UserModel;
             //TODO: Does it work with the services
+            if (this.conversations.Any(c => c.Username == selectedUser.Username))
+            {
+                return;
+            }
             var newConversation = ConversationsPersister.Start(sessionKey, new ConversationModel()
             {
                 FirstUser = currentUser,
@@ -147,9 +165,9 @@
             this.conversations.Remove(parameter as MissedConversationModel);
         }
 
-        private void HandleTextChanged(string searchText)
-        {
-            this.Contacts = this.allContacts.Where(um => um.Username.Contains(searchText));
+        private void HandleTextChanged(string newText)
+        { 
+            this.Contacts = this.allContacts.Where(um => um.Username.Contains(newText));
         }
     }
 }

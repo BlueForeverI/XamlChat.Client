@@ -13,6 +13,7 @@ namespace Xaml.Chat.Client.ViewModels
 {
     public class SearchFormViewModel : ViewModelBase, IPageViewModel
     {
+
         public SearchFormViewModel()
         {
         }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\School\Telerik\C#\Code & HW\WPF\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\App.xaml
-71013798350
+8-549458903
 
-39-1173902654
+43-1846861307
 15-104264751
-MainWindow.xaml;Views\ConversationView.xaml;Views\EditProfileView.xaml;Views\GeneralView.xaml;Views\LoginFormView.xaml;Views\RegisterFormView.xaml;Views\ViewUserProfileView.xaml;
+MainWindow.xaml;Views\ConversationView.xaml;Views\EditProfileView.xaml;Views\GeneralView.xaml;Views\LoginFormView.xaml;Views\RegisterFormView.xaml;Views\SearchFormView.xaml;Views\ViewUserProfileView.xaml;
 
 False
 
