@@ -1,4 +1,6 @@
-﻿namespace Xaml.Chat.Client.ViewModels
+﻿using Xaml.Chat.Client.Helpers;
+
+namespace Xaml.Chat.Client.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -20,11 +22,21 @@
             }
         }
 
-        public string SessionKey { get; set; }
+        public UserModel CurrentUser { get; set; }
 
         private ObservableCollection<MissedConversationModel> conversations;
 
         private ObservableCollection<UserModel> contacts;
+
+        public event EventHandler<ConversationStartedArgs> ConversationStarted;
+
+        private void RaiseConversationStarted(ConversationModel conversation)
+        {
+            if (this.ConversationStarted != null)
+            {
+                this.ConversationStarted(this, new ConversationStartedArgs(conversation));
+            }
+        }
 
         private UserModel currentUser;
         private ICommand closeConversation;
@@ -37,7 +49,7 @@
             {
                 if (this.conversations == null)
                 {
-                    this.Conversations = ConversationsPersister.GetMissed(SessionKey, this.currentUser.Id);
+                    this.Conversations = ConversationsPersister.GetMissed(CurrentUser.SessionKey, this.currentUser.Id);
                 }
                 return this.conversations;
             }
@@ -93,21 +105,29 @@
             }
         }
 
-        
-
         private void HandleStartConversation(object parameter)
         {
-            var view = CollectionViewSource.GetDefaultView(this.contacts);
-            UserModel selectedUser = view.CurrentItem as UserModel;
-            //TODO: Does it work with the services
-            var newConversation = ConversationsPersister.Start(SessionKey, new ConversationModel()
-            {
-                SecondUser = selectedUser,
-            });
-            this.conversations.Add(new MissedConversationModel()
-            {
-                Username=newConversation.SecondUser.Username,
-            });
+            //var view = CollectionViewSource.GetDefaultView(this.contacts);
+            //UserModel selectedUser = view.CurrentItem as UserModel;
+            ////TODO: Does it work with the services
+            //var newConversation = ConversationsPersister.Start(SessionKey, new ConversationModel()
+            //{
+            //    SecondUser = selectedUser,
+            //});
+            //this.conversations.Add(new MissedConversationModel()
+            //{
+            //    Username=newConversation.SecondUser.Username,
+            //});
+
+            var user = parameter as UserModel;
+            var conversation = new ConversationModel()
+                                   {
+                                       FirstUser = CurrentUser,
+                                       SecondUser = user
+                                   };
+
+            var startedConversation = ConversationsPersister.Start(CurrentUser.SessionKey, conversation);
+            RaiseConversationStarted(startedConversation);
         }
 
         private void HandleViewProfile(object parameter)
@@ -126,10 +146,10 @@
             this.Contacts = new List<UserModel>();
         }
 
-        public GeneralViewModel(string sessionKey)
+        public GeneralViewModel(UserModel currentUser)
         {
-            this.SessionKey = sessionKey;
-            this.Contacts = ContactsPersister.GetAllContacts(this.SessionKey);
+            this.CurrentUser = currentUser;
+            this.Contacts = ContactsPersister.GetAllContacts(this.CurrentUser.SessionKey);
             OnPropertyChanged("Contacts");
         }
     }

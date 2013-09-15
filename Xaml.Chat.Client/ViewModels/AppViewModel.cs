@@ -171,12 +171,9 @@
             // TODO: initialize our own views
             this.ViewModels = new List<IPageViewModel>();
             this.ProfileVM = new ProfileViewModel(new UserModel()); 
-            this.ConversationVM = new ConversationViewModel();
             var registerVM = new RegisterFormViewModel();
             registerVM.RegisterSuccess += this.RegisterSuccessfull;
             this.RegisterFormVM = registerVM;
-
-            this.GeneralVM = new GeneralViewModel();
 
             var loginVM = new LoginViewModel();
             loginVM.LoginSuccess += this.LoginSuccessful;
@@ -189,10 +186,29 @@
             this.CurrentViewModel = this.LoginVM;
         }
 
+        private void InitializeGeneralViewModel()
+        {
+            var generavVM = new GeneralViewModel(CurrentUserSetting);
+            generavVM.ConversationStarted += this.ConversationStartedHandler;
+            this.GeneralVM = generavVM;
+        }
+
+        private void ConversationStartedHandler(object sender, ConversationStartedArgs e)
+        {
+            var conversation = e.Conversation;
+            var partner = (conversation.FirstUser.Username == CurrentUserSetting.Username)
+                                              ? conversation.SecondUser
+                                              : conversation.FirstUser;
+
+
+            this.ConversationVM = new ConversationViewModel(conversation, CurrentUserSetting, partner);
+            this.CurrentViewModel = this.ConversationVM;
+        }
+
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
         {
             this.CurrentUserSetting = e.RegisteredUser;
-            this.GeneralVM = new GeneralViewModel(e.RegisteredUser.SessionKey);
+            InitializeGeneralViewModel();
             this.CurrentViewModel = this.GeneralVM;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
         }
@@ -200,7 +216,7 @@
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
             this.CurrentUserSetting = e.UserSetting;
-            this.GeneralVM = new GeneralViewModel(e.UserSetting.SessionKey);
+            InitializeGeneralViewModel();
             this.CurrentViewModel = this.GeneralVM;
             this.LoggedInUser = true;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;

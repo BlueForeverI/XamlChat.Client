@@ -19,8 +19,12 @@ namespace Xaml.Chat.Client.ViewModels
         private PubnubAPI pubnub;
         private string channelName;
 
-        public ConversationViewModel()
+        public ConversationViewModel(ConversationModel conversation, UserModel currentUser, UserModel partner)
         {
+            this.CurrentConversation = conversation;
+            this.CurrentUserInfo = currentUser;
+            this.Partner = partner;
+
             pubnub = new PubnubAPI(PUBLISH_KEY, SUBSCRIBE_KEY, SECRET_KEY, true);
 
             var minId = Math.Min(CurrentUserInfo.Id, Partner.Id);
@@ -43,52 +47,11 @@ namespace Xaml.Chat.Client.ViewModels
 
         public string MessageToSend { get; set; }
 
-        public UserModel CurrentUserInfo
-        {
-            get
-            {
-                return new UserModel()
-                           {
-                               Id = 50001
-                           };
-            }
-        }
+        public UserModel CurrentUserInfo { get; set; }
 
-        public UserModel Partner 
-        { 
-            get
-            {
-                return new UserModel()
-                           {
-                               Id = 50000,
-                               Username = "Pesho123",
-                               ProfilePictureUrl = "http://images1.wikia.nocookie.net/__cb20120325053014/mugen/images/6/6f/Spiderman.png"
-                           };
-            }
-        }
+        public UserModel Partner { get; set; }
 
-        public ConversationModel CurrentConversation
-        {
-            get
-            {
-                return new ConversationModel()
-                           {
-                               Messages = new List<MessageModel>()
-                                              {
-                                                  new MessageModel()
-                                                      {
-                                                          Sender = new UserModel(){Username = "Pesho"},
-                                                          Content = "Pesho kaza"
-                                                      },
-                                                  new MessageModel()
-                                                      {
-                                                          Sender = new UserModel(){Username = "Gosho"},
-                                                          Content = "gosho kaza"
-                                                      }
-                                              }
-                           };
-            }
-        }
+        public ConversationModel CurrentConversation { get; set; }
 
         private ICommand sendMessage;
         public ICommand SendMessage
