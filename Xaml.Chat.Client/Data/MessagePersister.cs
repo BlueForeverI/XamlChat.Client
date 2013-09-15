@@ -12,7 +12,7 @@
         public static void Send(string sessionKey, MessageModel msg)
         {
             headers[HttpRequester.sessionKeyHeaderName] = sessionKey;
-            HttpRequester.Post(baseUrl + "send", msg);
+            HttpRequester.Post(baseUrl + "send", msg, headers);
         }
 
         public static IEnumerable<MessageModel> GetAllMsgsByConversation(string sessionKey, int id)

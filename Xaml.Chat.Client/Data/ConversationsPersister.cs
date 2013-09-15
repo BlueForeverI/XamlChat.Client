@@ -7,7 +7,7 @@
 
     public class ConversationsPersister
     {
-        private static string baseUrl = "http://xamlchat.apphb.com/conversations/";
+        private static string baseUrl = "http://xamlchat.apphb.com/api/conversations/";
         
         private static Dictionary<string, string> headers = new Dictionary<string, string>();
 

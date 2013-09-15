@@ -38,6 +38,14 @@
             DataType="{x:Type ViewModels:ProfileViewModel}">
             <Views:EditProfile/>
         </DataTemplate>
+        <DataTemplate      
+            DataType="{x:Type ViewModels:ContactRequestsViewModel}">
+            <Views:ContactRequestsView/>
+        </DataTemplate>
+        <DataTemplate      
+            DataType="{x:Type ViewModels:MissedConversationsViewModel}">
+            <Views:MissedConversationsView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -50,6 +58,10 @@
             <Button Command="{Binding GoToProfile}">Edit Profile</Button>
             <Button Command="{Binding GoToSearhContacts}">
                 Search Contacts
+            </Button>
+            <Button Command="{Binding GoToContactRequests}">Contact Requests</Button>
+            <Button Command="{Binding GoToMissedConversations}">
+                <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
             </Button>
         </StackPanel>
         <ContentControl Grid.Row="1"

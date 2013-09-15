@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xaml.Chat.Client.Behavior;
+using Xaml.Chat.Client.Data;
 using Xaml.Chat.Client.Helpers;
 using Xaml.Chat.Client.Models;
 
@@ -16,11 +17,20 @@ namespace Xaml.Chat.Client.ViewModels
         private const string PUBLISH_KEY = "pub-c-c91f17ec-a2d1-4afb-93d5-650cb2e2d610";
         private const string SUBSCRIBE_KEY = "sub-c-59c4b3f8-1d38-11e3-9231-02ee2ddab7fe";
         private const string SECRET_KEY = "sec-c-MzJhZjE1NmMtOWMxNC00NGViLWE1MDUtNGUyNzY3YWFkODE1";
-        private PubnubAPI pubnub;
+        private static PubnubAPI pubnub;
         private string channelName;
 
-        public ConversationViewModel()
+        public ConversationViewModel(ConversationModel conversation, UserModel currentUser, UserModel partner)
         {
+            this.CurrentConversation = conversation;
+            this.CurrentUserInfo = currentUser;
+            this.Partner = partner;
+            this.CurrentConversation.Messages =
+                MessagePersister.GetAllMsgsByConversation(CurrentUserInfo.SessionKey,
+                                                            CurrentConversation.Id);
+
+            OnPropertyChanged("CurrentConversation");
+
             pubnub = new PubnubAPI(PUBLISH_KEY, SUBSCRIBE_KEY, SECRET_KEY, true);
 
             var minId = Math.Min(CurrentUserInfo.Id, Partner.Id);
@@ -30,12 +40,15 @@ namespace Xaml.Chat.Client.ViewModels
 
             Thread t = new Thread(() =>
                                   pubnub.Subscribe(channelName, HandleNewMessageReceived));
+            t.IsBackground = true;
             t.Start();
         }
 
         private bool HandleNewMessageReceived(object message)
         {
-            // TODO: GET ALL MESSAGES
+            this.CurrentConversation.Messages =
+                MessagePersister.GetAllMsgsByConversation(CurrentUserInfo.SessionKey,
+                                                            CurrentConversation.Id);
 
             OnPropertyChanged("CurrentConversation");
             return true;
@@ -43,59 +56,18 @@ namespace Xaml.Chat.Client.ViewModels
 
         public string MessageToSend { get; set; }
 
-        public UserModel CurrentUserInfo
-        {
-            get
-            {
-                return new UserModel()
-                           {
-                               Id = 50001
-                           };
-            }
-        }
+        public UserModel CurrentUserInfo { get; set; }
 
-        public UserModel Partner 
-        { 
-            get
-            {
-                return new UserModel()
-                           {
-                               Id = 50000,
-                               Username = "Pesho123",
-                               ProfilePictureUrl = "http://images1.wikia.nocookie.net/__cb20120325053014/mugen/images/6/6f/Spiderman.png"
-                           };
-            }
-        }
+        public UserModel Partner { get; set; }
 
-        public ConversationModel CurrentConversation
-        {
-            get
-            {
-                return new ConversationModel()
-                           {
-                               Messages = new List<MessageModel>()
-                                              {
-                                                  new MessageModel()
-                                                      {
-                                                          Sender = new UserModel(){Username = "Pesho"},
-                                                          Content = "Pesho kaza"
-                                                      },
-                                                  new MessageModel()
-                                                      {
-                                                          Sender = new UserModel(){Username = "Gosho"},
-                                                          Content = "gosho kaza"
-                                                      }
-                                              }
-                           };
-            }
-        }
+        public ConversationModel CurrentConversation { get; set; }
 
         private ICommand sendMessage;
         public ICommand SendMessage
         {
             get
             {
-                if(this.sendMessage == null)
+                if (this.sendMessage == null)
                 {
                     this.sendMessage = new RelayCommand(HandleSendMessageCommand);
                 }
@@ -107,7 +79,17 @@ namespace Xaml.Chat.Client.ViewModels
         private void HandleSendMessageCommand(object parameter)
         {
             // TODo: SEND MESSAGE
+            var message = new MessageModel()
+                              {
+                                  Sender = CurrentUserInfo,
+                                  Conversation = CurrentConversation,
+                                  Content = MessageToSend
+                              };
+
+            MessagePersister.Send(CurrentUserInfo.SessionKey, message);
             pubnub.Publish(channelName, "New message");
+            this.MessageToSend = "";
+            OnPropertyChanged("MessageToSend");
         }
 
         public string Name { get { return "Conversation Window"; } }

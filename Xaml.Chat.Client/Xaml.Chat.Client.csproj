@@ -41,8 +41,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +70,7 @@
     <Compile Include="Data\MessagePersister.cs" />
     <Compile Include="Data\UserPersister.cs" />
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ConversationStartedArgs.cs" />
     <Compile Include="Helpers\ImageUploader.cs" />
     <Compile Include="Helpers\LoginSuccessArgs.cs" />
     <Compile Include="Helpers\PubnubAPI.cs" />
@@ -83,14 +86,19 @@
     <Compile Include="Models\UserEditModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
+    <Compile Include="ViewModels\ContactRequestsViewModel.cs" />
     <Compile Include="ViewModels\ConversationViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MissedConversationsViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterFormViewModel.cs" />
     <Compile Include="ViewModels\SearchFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\ContactRequestsView.xaml.cs">
+      <DependentUpon>ContactRequestsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConversationView.xaml.cs">
       <DependentUpon>ConversationView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +110,9 @@
     </Compile>
     <Compile Include="Views\LoginFormView.xaml.cs">
       <DependentUpon>LoginFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MissedConversationsView.xaml.cs">
+      <DependentUpon>MissedConversationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterFormView.xaml.cs">
       <DependentUpon>RegisterFormView.xaml</DependentUpon>
@@ -124,6 +135,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ContactRequestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConversationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,6 +152,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LoginFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MissedConversationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

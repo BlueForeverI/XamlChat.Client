@@ -6,10 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="600"
              xmlns:local="clr-namespace:Xaml.Chat.Client.ViewModels"
-             xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers"
-             xmlns:views="clr-namespace:Xaml.Chat.Client.Views"
-             xmlns:commandBehavior="clr-namespace:Xaml.Chat.Client.Behavior">
-    <UserControl.Resources>
+             xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers">    <UserControl.Resources>
         <helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
     </UserControl.Resources>
     <DockPanel Width="600" Height="400">
@@ -26,7 +23,7 @@
             <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding SearchText,  UpdateSourceTrigger=PropertyChanged}"
                      commandBehavior:CommandsBehavior.SearchChanged="{Binding SearchTextChanged}"
                      ></TextBox>
-            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="listViewContacts"
                       ItemsSource="{Binding Contacts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -49,12 +46,27 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+<<<<<<< .mine
             <Button Grid.Row="2" Grid.Column="0" Content="Start Conversation"
                     Command="{Binding StartConversation}"/>
             <Button Grid.Row="2" Grid.Column="1" Content="View Profile"                   
                     Command="{Binding ViewProfile}"/>
+
+
+
+
+=======
+            <Button Grid.Row="2" Grid.Column="0"
+                    Command="{Binding StartConversation}"
+                    CommandParameter="{Binding ElementName=listViewContacts, Path=SelectedValue}">Start Conversation</Button>
+            <Button Grid.Row="2" Grid.Column="1"
+                    Command="{Binding ViewProfile}">View Profile</Button>
+
+            
+         
+>>>>>>> .theirs
         </Grid>
-        <TabControl DockPanel.Dock="Right" ItemsSource="{Binding Conversations}">
+        <!--<TabControl DockPanel.Dock="Right" ItemsSource="{Binding Conversations}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -100,6 +112,6 @@
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ContentTemplate>
-        </TabControl>
+        </TabControl>-->
     </DockPanel>
 </UserControl>
