@@ -47,7 +47,10 @@
         public static UserModel EditUser(string sessionKey, UserEditModel editedUser)
         {
             ValidateUsername(editedUser.Username);
-            ValidateAuthCode(editedUser.NewPasswordHash);
+            if (editedUser.OldPasswordHash!=null)
+            {
+                ValidateAuthCode(editedUser.NewPasswordHash);
+            }
             headers[HttpRequester.sessionKeyHeaderName] = sessionKey;
             UserModel result = HttpRequester.
                 Post<UserModel>(baseUrl + "users/edit", editedUser,headers);
