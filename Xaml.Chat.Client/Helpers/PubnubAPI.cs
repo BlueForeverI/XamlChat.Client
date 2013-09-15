@@ -374,6 +374,7 @@ namespace Xaml.Chat.Client.Helpers
             // Set Timeout
             request.Timeout = 200000;
             request.ReadWriteTimeout = 200000;
+            request.ServicePoint.ConnectionLimit = 1000;
 
             // Receive Response
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();

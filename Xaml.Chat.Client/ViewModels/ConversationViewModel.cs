@@ -17,7 +17,7 @@ namespace Xaml.Chat.Client.ViewModels
         private const string PUBLISH_KEY = "pub-c-c91f17ec-a2d1-4afb-93d5-650cb2e2d610";
         private const string SUBSCRIBE_KEY = "sub-c-59c4b3f8-1d38-11e3-9231-02ee2ddab7fe";
         private const string SECRET_KEY = "sec-c-MzJhZjE1NmMtOWMxNC00NGViLWE1MDUtNGUyNzY3YWFkODE1";
-        private PubnubAPI pubnub;
+        private static PubnubAPI pubnub;
         private string channelName;
 
         public ConversationViewModel(ConversationModel conversation, UserModel currentUser, UserModel partner)

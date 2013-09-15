@@ -107,18 +107,6 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleStartConversation(object parameter)
         {
-            //var view = CollectionViewSource.GetDefaultView(this.contacts);
-            //UserModel selectedUser = view.CurrentItem as UserModel;
-            ////TODO: Does it work with the services
-            //var newConversation = ConversationsPersister.Start(SessionKey, new ConversationModel()
-            //{
-            //    SecondUser = selectedUser,
-            //});
-            //this.conversations.Add(new MissedConversationModel()
-            //{
-            //    Username=newConversation.SecondUser.Username,
-            //});
-
             var user = parameter as UserModel;
             var conversation = new ConversationModel()
                                    {

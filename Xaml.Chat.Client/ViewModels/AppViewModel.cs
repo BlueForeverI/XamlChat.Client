@@ -241,6 +241,7 @@ namespace Xaml.Chat.Client.ViewModels
                 };
                 timer.Start();
             });
+
             thread.IsBackground = true;
             thread.Start();
         }
