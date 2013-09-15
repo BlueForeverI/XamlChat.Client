@@ -1,4 +1,8 @@
-﻿namespace Xaml.Chat.Client.ViewModels
+﻿using System.Threading;
+using Xaml.Chat.Client.Data;
+using System.Linq;
+
+namespace Xaml.Chat.Client.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +16,7 @@
         private ICommand changeViewModelCommand;
 
         public UserModel CurrentUserSetting { get; set; }
+        public int MissedConversationsCount { get; set; }
 
         private IPageViewModel currentViewModel;
         private bool loggedInUser = false;
@@ -19,6 +24,7 @@
         private ICommand goToSearhContacts;
         private ICommand goToProfile;
         private ICommand goToContactRequests;
+        private ICommand goToMissedConversations;
 
         public IPageViewModel CurrentViewModel
         {
@@ -52,6 +58,7 @@
         public LoginViewModel LoginVM { get; set; }
         public SearchFormViewModel SearchVM { get; set; }
         public ContactRequestsViewModel ContactRequestsVM { get; set; }
+        public MissedConversationsViewModel MissedConversationsVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -131,6 +138,29 @@
             }
         }
 
+        public ICommand GoToMissedConversations
+        {
+            get
+            {
+                if(this.goToMissedConversations == null)
+                {
+                    this.goToMissedConversations = new RelayCommand(HandleGoToMissedConversations);
+                }
+
+                return goToMissedConversations;
+            }
+        }
+
+        private void HandleGoToMissedConversations(object parameter)
+        {
+            var missedConversations = ConversationsPersister.GetMissed(CurrentUserSetting.SessionKey, 0);
+            this.MissedConversationsVM = new MissedConversationsViewModel();
+            this.MissedConversationsVM.MissedConversations = missedConversations;
+            this.MissedConversationsVM.CurrentUserInfo = CurrentUserSetting;
+            this.MissedConversationsVM.ViewConversation += ConversationStartedHandler;
+            this.CurrentViewModel = this.MissedConversationsVM;
+        }
+
         private void HandleGoToContactRequests(object parameter)
         {
             this.ContactRequestsVM = new ContactRequestsViewModel(this.CurrentUserSetting.SessionKey);
@@ -198,6 +228,22 @@
             BindingCurrentUser.Username = this.CurrentUserSetting.Username;
             generavVM.ConversationStarted += this.ConversationStartedHandler;
             this.GeneralVM = generavVM;
+
+            Thread thread = new Thread(() =>
+            {
+                System.Timers.Timer timer = new System.Timers.Timer(1000);
+                timer.Elapsed += (sender, args) =>
+                {
+                    var missedConversations =
+                        ConversationsPersister.GetMissed(CurrentUserSetting.SessionKey, 0);
+
+                    this.MissedConversationsCount = missedConversations.Count();
+                    OnPropertyChanged("MissedConversationsCount");
+                };
+                timer.Start();
+            });
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         private void ConversationStartedHandler(object sender, ConversationStartedArgs e)
