@@ -85,6 +85,12 @@ namespace Xaml.Chat.Client.ViewModels
                     this.CurrentUserSettings = UserPersister.EditUser(CurrentUserSettings.SessionKey, editProfile);
                     this.NewPassword = "";
                     MessageBox.Show("Profile changed");
+                    this.FirstName = this.CurrentUserSettings.FirstName;
+                    this.LastName = this.CurrentUserSettings.LastName;
+                    this.OldPassword = "";
+                    this.NewPassword = "";
+                    OnPropertyChanged("OldPassword");
+                    OnPropertyChanged("NewPassword");
                 }
                 catch (Exception ex)
                 {
