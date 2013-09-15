@@ -41,8 +41,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,6 +69,7 @@
     <Compile Include="Data\MessagePersister.cs" />
     <Compile Include="Data\UserPersister.cs" />
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ConversationStartedArgs.cs" />
     <Compile Include="Helpers\ImageUploader.cs" />
     <Compile Include="Helpers\LoginSuccessArgs.cs" />
     <Compile Include="Helpers\PubnubAPI.cs" />

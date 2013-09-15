@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xaml.Chat.Client.Behavior;
+using Xaml.Chat.Client.Data;
 using Xaml.Chat.Client.Helpers;
 using Xaml.Chat.Client.Models;
 
@@ -39,7 +40,9 @@ namespace Xaml.Chat.Client.ViewModels
 
         private bool HandleNewMessageReceived(object message)
         {
-            // TODO: GET ALL MESSAGES
+            this.CurrentConversation.Messages = 
+                MessagePersister.GetAllMsgsByConversation(CurrentUserInfo.SessionKey,
+                                                                                          CurrentConversation.Id);
 
             OnPropertyChanged("CurrentConversation");
             return true;
@@ -70,6 +73,14 @@ namespace Xaml.Chat.Client.ViewModels
         private void HandleSendMessageCommand(object parameter)
         {
             // TODo: SEND MESSAGE
+            var message = new MessageModel()
+                              {
+                                  Sender = CurrentUserInfo,
+                                  Conversation = CurrentConversation,
+                                  Content = MessageToSend
+                              };
+
+            MessagePersister.Send(CurrentUserInfo.SessionKey, message);
             pubnub.Publish(channelName, "New message");
         }
 
