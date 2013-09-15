@@ -18,6 +18,7 @@
         private ICommand logoutCommand;
         private ICommand goToSearhContacts;
         private ICommand goToProfile;
+        private ICommand goToContactRequests;
 
         public IPageViewModel CurrentViewModel
         {
@@ -50,6 +51,7 @@
         public GeneralViewModel GeneralVM { get; set; }
         public LoginViewModel LoginVM { get; set; }
         public SearchFormViewModel SearchVM { get; set; }
+        public ContactRequestsViewModel ContactRequestsVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -116,6 +118,25 @@
             }
         }
 
+        public ICommand GoToContactRequests
+        {
+            get
+            {
+                if(this.goToContactRequests == null)
+                {
+                    this.goToContactRequests = new RelayCommand(HandleGoToContactRequests);
+                }
+
+                return this.goToContactRequests;
+            }
+        }
+
+        private void HandleGoToContactRequests(object parameter)
+        {
+            this.ContactRequestsVM = new ContactRequestsViewModel(this.CurrentUserSetting.SessionKey);
+            this.CurrentViewModel = this.ContactRequestsVM;
+        }
+
         private void HandleGoToHome(object parameter)
         {
             this.CurrentViewModel = this.GeneralVM;
@@ -127,6 +148,7 @@
             this.ProfileVM = new ProfileViewModel(this.CurrentUserSetting);
             this.CurrentViewModel = this.ProfileVM;
         }
+
         private void HandleGoToSearch(object parameter)
         {
             this.CurrentViewModel = this.SearchVM;
@@ -162,12 +184,15 @@
 
             this.SearchVM = new SearchFormViewModel();
 
+            this.ContactRequestsVM = new ContactRequestsViewModel();
+
             this.CurrentViewModel = this.LoginVM;
         }
 
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
         {
             this.CurrentUserSetting = e.RegisteredUser;
+            this.GeneralVM = new GeneralViewModel(e.RegisteredUser.SessionKey);
             this.CurrentViewModel = this.GeneralVM;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
         }
@@ -175,6 +200,7 @@
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
             this.CurrentUserSetting = e.UserSetting;
+            this.GeneralVM = new GeneralViewModel(e.UserSetting.SessionKey);
             this.CurrentViewModel = this.GeneralVM;
             this.LoggedInUser = true;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;

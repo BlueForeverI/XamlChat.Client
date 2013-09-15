@@ -82,6 +82,7 @@
     <Compile Include="Models\UserEditModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
+    <Compile Include="ViewModels\ContactRequestsViewModel.cs" />
     <Compile Include="ViewModels\ConversationViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
@@ -90,6 +91,9 @@
     <Compile Include="ViewModels\RegisterFormViewModel.cs" />
     <Compile Include="ViewModels\SearchFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\ContactRequestsView.xaml.cs">
+      <DependentUpon>ContactRequestsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConversationView.xaml.cs">
       <DependentUpon>ConversationView.xaml</DependentUpon>
     </Compile>
@@ -123,6 +127,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ContactRequestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConversationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
