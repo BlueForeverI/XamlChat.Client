@@ -12,6 +12,12 @@
 
     public class GeneralViewModel : ViewModelBase, IPageViewModel
     {
+        public GeneralViewModel(UserModel currentUser)
+        {
+            this.sessionKey = currentUser.SessionKey;
+            this.currentUser = currentUser;
+        }
+        
         public string Name
         {
             get
@@ -21,17 +27,13 @@
         }
 
         private string sessionKey;
-
         private ObservableCollection<MissedConversationModel> conversations;
-
         private ObservableCollection<UserModel> contacts;
-
+        private IEnumerable<UserModel> allContacts;
         private UserModel currentUser;
         private ICommand closeConversation;
         private ICommand viewProfile;
         private ICommand startConversation;
-        private ICommand goToSearhContacts;
-        private ICommand goToProfile;
 
         public IEnumerable<MissedConversationModel> Conversations
         {
@@ -64,6 +66,7 @@
                 if (this.contacts == null)
                 {
                     this.Contacts = ContactsPersister.GetAllContacts(sessionKey);
+                    this.allContacts = this.Contacts;
                 }
                 return this.contacts;
             }
@@ -97,7 +100,7 @@
         {
             get
             {
-                if (this.viewProfile==null)
+                if (this.viewProfile == null)
                 {
                     this.viewProfile = new RelayCommand(this.HandleViewProfile);
                 }
@@ -109,15 +112,13 @@
         {
             get
             {
-                if (this.startConversation==null)
+                if (this.startConversation == null)
                 {
                     this.startConversation = new RelayCommand(this.HandleStartConversation);
                 }
                 return this.startConversation;
             }
         }
-
-        
 
         private void HandleStartConversation(object parameter)
         {
@@ -126,18 +127,19 @@
             //TODO: Does it work with the services
             var newConversation = ConversationsPersister.Start(sessionKey, new ConversationModel()
             {
+                FirstUser = currentUser,
                 SecondUser = selectedUser,
             });
             this.conversations.Add(new MissedConversationModel()
             {
-                Username=newConversation.SecondUser.Username,
+                Username = newConversation.SecondUser.Username,
             });
         }
 
         private void HandleViewProfile(object parameter)
         {
             var view = CollectionViewSource.GetDefaultView(this.contacts);            
-            UserModel selectedUser =view.CurrentItem as UserModel;
+            UserModel selectedUser = view.CurrentItem as UserModel;
         }
 
         private void HandleCloseConversation(object parameter)
@@ -145,31 +147,9 @@
             this.conversations.Remove(parameter as MissedConversationModel);
         }
 
-        public GeneralViewModel()
+        private void HandleTextChanged(string searchText)
         {
-            //this.conversations = new ObservableCollection<MissedConversationModel>()
-            //{
-            //    new MissedConversationModel()
-            //    {
-            //        Username="Stamat",
-            //    },
-            //    new MissedConversationModel()
-            //    {
-            //        Username="Mira"
-            //    }
-            //};
-            //this.contacts = new ObservableCollection<UserModel>()
-            //{
-            //    new UserModel()
-            //    {
-            //        Username="Contact 1",
-            //        ProfilePictureUrl="http://images2.fanpop.com/image/photos/9600000/Batman-Logo-batman-9683803-1280-1024.jpg"
-            //    },
-            //    new UserModel()
-            //    {
-            //        Username="Contact 2"
-            //    }
-            //};
+            this.Contacts = this.allContacts.Where(um => um.Username.Contains(searchText));
         }
     }
 }

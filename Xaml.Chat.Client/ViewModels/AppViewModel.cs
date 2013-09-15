@@ -9,16 +9,14 @@
 
     public class AppViewModel : ViewModelBase
     {
-        private ICommand changeViewModelCommand;
-
-        public UserModel CurrentUserSetting { get; set; }
-
-        private IPageViewModel currentViewModel;
         private bool loggedInUser = false;
+
+        private ICommand changeViewModelCommand;
+        private IPageViewModel currentViewModel;
         private ICommand logoutCommand;
         private ICommand goToSearhContacts;
         private ICommand goToProfile;
-
+        
         public IPageViewModel CurrentViewModel
         {
             get
@@ -31,6 +29,8 @@
                 this.OnPropertyChanged("CurrentViewModel");
             }
         }
+
+        public UserModel CurrentUserSetting { get; set; }
 
         public bool LoggedInUser
         {
@@ -46,9 +46,13 @@
         }
 
         public ConversationViewModel ConversationVM { get; set; }
+
         public RegisterFormViewModel RegisterFormVM { get; set; }
+
         public GeneralViewModel GeneralVM { get; set; }
+
         public LoginViewModel LoginVM { get; set; }
+
         public SearchFormViewModel SearchVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
@@ -108,7 +112,7 @@
         {
             get
             {
-                if (this.goToHome ==null)
+                if (this.goToHome == null)
                 {
                     this.goToHome = new RelayCommand(this.HandleGoToHome);
                 }
@@ -119,7 +123,6 @@
         private void HandleGoToHome(object parameter)
         {
             this.CurrentViewModel = this.GeneralVM;
-
         }
 
         private void HanddleGoToProfile(object parameter)
@@ -127,6 +130,7 @@
             this.ProfileVM = new ProfileViewModel(this.CurrentUserSetting);
             this.CurrentViewModel = this.ProfileVM;
         }
+
         private void HandleGoToSearch(object parameter)
         {
             this.CurrentViewModel = this.SearchVM;
@@ -135,7 +139,6 @@
         private void HandleLogoutCommand(object parameter)
         {
             // TODO: our own logout logic
-
         }
 
         private void HandleChangeViewModelCommand(object parameter)
@@ -153,8 +156,6 @@
             var registerVM = new RegisterFormViewModel();
             registerVM.RegisterSuccess += this.RegisterSuccessfull;
             this.RegisterFormVM = registerVM;
-
-            this.GeneralVM = new GeneralViewModel();
 
             var loginVM = new LoginViewModel();
             loginVM.LoginSuccess += this.LoginSuccessful;
@@ -175,6 +176,7 @@
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
         {
             this.CurrentUserSetting = e.UserSetting;
+            this.GeneralVM = new GeneralViewModel(this.CurrentUserSetting);
             this.CurrentViewModel = this.GeneralVM;
             this.LoggedInUser = true;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
