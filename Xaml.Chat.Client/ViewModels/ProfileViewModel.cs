@@ -9,6 +9,7 @@ using Xaml.Chat.Client.Models;
 using Xaml.Chat.Client.Helpers;
 using System.Windows;
 using Xaml.Chat.Client.Data;
+using Microsoft.Win32;
 
 namespace Xaml.Chat.Client.ViewModels
 {
@@ -60,6 +61,34 @@ namespace Xaml.Chat.Client.ViewModels
             }
         }
 
+        private ICommand editPicture;
+
+        public ICommand EditPicture
+        {
+
+            get
+            {
+                if (this.editPicture == null)
+                {
+                    this.editPicture = new RelayCommand(this.HandleSelectProfilePicture);
+                }
+                return this.editPicture;
+            }
+            
+        }
+
+        private void HandleSelectProfilePicture(object parameter)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                var url = ImageUploader.UploadImage(filePath);
+                this.ProfilePictureUrl = url;
+                OnPropertyChanged("ProfilePictureUrl");
+            }
+        }
+
         private void HandleEditProfileCommand(object parameter)
         {
 
@@ -85,6 +114,12 @@ namespace Xaml.Chat.Client.ViewModels
                     this.CurrentUserSettings = UserPersister.EditUser(CurrentUserSettings.SessionKey, editProfile);
                     this.NewPassword = "";
                     MessageBox.Show("Profile changed");
+                    this.FirstName = this.CurrentUserSettings.FirstName;
+                    this.LastName = this.CurrentUserSettings.LastName;
+                    this.OldPassword = "";
+                    this.NewPassword = "";
+                    OnPropertyChanged("OldPassword");
+                    OnPropertyChanged("NewPassword");
                 }
                 catch (Exception ex)
                 {
