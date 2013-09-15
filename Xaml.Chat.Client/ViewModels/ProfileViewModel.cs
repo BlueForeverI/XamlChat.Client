@@ -92,7 +92,7 @@ namespace Xaml.Chat.Client.ViewModels
         private void HandleEditProfileCommand(object parameter)
         {
 
-            if (this.NewPassword == null || this.NewPassword.Length < 2)
+            if ((this.NewPassword == null || this.NewPassword.Length < 2) && this.OldPassword!=null)
             {
                 MessageBox.Show("Invalid new Password");
             }
@@ -104,22 +104,28 @@ namespace Xaml.Chat.Client.ViewModels
                     {
                         Id = CurrentUserSettings.Id,
                         Username = Username,
-                        OldPasswordHash = Sha1Encrypter.CalculateSHA1(OldPassword),
-                        NewPasswordHash = Sha1Encrypter.CalculateSHA1(NewPassword),
                         FirstName = FirstName,
                         LastName = LastName,
                         ProfilePictureUrl = ProfilePictureUrl
                     };
 
+                    if (this.OldPassword != null)
+                    { 
+                        editProfile.OldPasswordHash = Sha1Encrypter.CalculateSHA1(OldPassword);
+                        editProfile.NewPasswordHash = Sha1Encrypter.CalculateSHA1(NewPassword);
+                    }
+
                     this.CurrentUserSettings = UserPersister.EditUser(CurrentUserSettings.SessionKey, editProfile);
-                    this.NewPassword = "";
-                    MessageBox.Show("Profile changed");
                     this.FirstName = this.CurrentUserSettings.FirstName;
                     this.LastName = this.CurrentUserSettings.LastName;
+                    
                     this.OldPassword = "";
                     this.NewPassword = "";
                     OnPropertyChanged("OldPassword");
                     OnPropertyChanged("NewPassword");
+                    OnPropertyChanged("FirstName");
+                    OnPropertyChanged("LastName");
+                    MessageBox.Show("Profile changed");
                 }
                 catch (Exception ex)
                 {
