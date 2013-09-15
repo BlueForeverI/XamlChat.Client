@@ -225,6 +225,7 @@ namespace Xaml.Chat.Client.ViewModels
         private void InitializeGeneralViewModel()
         {
             var generavVM = new GeneralViewModel(CurrentUserSetting);
+            BindingCurrentUser.Username = this.CurrentUserSetting.Username;
             generavVM.ConversationStarted += this.ConversationStartedHandler;
             this.GeneralVM = generavVM;
 
