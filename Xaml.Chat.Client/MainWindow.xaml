@@ -38,6 +38,11 @@
             DataType="{x:Type ViewModels:ProfileViewModel}">
             <Views:EditProfile/>
         </DataTemplate>
+        <DataTemplate      
+            DataType="{x:Type ViewModels:ContactRequestsViewModel}">
+            <Views:ContactRequestsView/>
+        </DataTemplate>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -51,6 +56,7 @@
             <Button Command="{Binding GoToSearhContacts}">
                 Search Contacts
             </Button>
+            <Button Command="{Binding GoToContactRequests}">Contact Requests</Button>
         </StackPanel>
         <ContentControl Grid.Row="1"
             Content="{Binding Path=CurrentViewModel}" />

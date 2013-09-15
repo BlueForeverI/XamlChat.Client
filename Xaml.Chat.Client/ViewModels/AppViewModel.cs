@@ -18,6 +18,7 @@
         private ICommand logoutCommand;
         private ICommand goToSearhContacts;
         private ICommand goToProfile;
+        private ICommand goToContactRequests;
 
         public IPageViewModel CurrentViewModel
         {
@@ -50,6 +51,7 @@
         public GeneralViewModel GeneralVM { get; set; }
         public LoginViewModel LoginVM { get; set; }
         public SearchFormViewModel SearchVM { get; set; }
+        public ContactRequestsViewModel ContactRequestsVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -116,6 +118,25 @@
             }
         }
 
+        public ICommand GoToContactRequests
+        {
+            get
+            {
+                if(this.goToContactRequests == null)
+                {
+                    this.goToContactRequests = new RelayCommand(HandleGoToContactRequests);
+                }
+
+                return this.goToContactRequests;
+            }
+        }
+
+        private void HandleGoToContactRequests(object parameter)
+        {
+            this.ContactRequestsVM = new ContactRequestsViewModel(this.CurrentUserSetting.SessionKey);
+            this.CurrentViewModel = this.ContactRequestsVM;
+        }
+
         private void HandleGoToHome(object parameter)
         {
             this.CurrentViewModel = this.GeneralVM;
@@ -161,6 +182,8 @@
             this.LoginVM = loginVM;
 
             this.SearchVM = new SearchFormViewModel();
+
+            this.ContactRequestsVM = new ContactRequestsViewModel();
 
             this.CurrentViewModel = this.LoginVM;
         }
