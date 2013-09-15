@@ -9,6 +9,7 @@ using Xaml.Chat.Client.Models;
 using Xaml.Chat.Client.Helpers;
 using System.Windows;
 using Xaml.Chat.Client.Data;
+using Microsoft.Win32;
 
 namespace Xaml.Chat.Client.ViewModels
 {
@@ -57,6 +58,34 @@ namespace Xaml.Chat.Client.ViewModels
                     this.editProfile = new RelayCommand(this.HandleEditProfileCommand);  
                 }
                 return this.editProfile;
+            }
+        }
+
+        private ICommand editPicture;
+
+        public ICommand EditPicture
+        {
+
+            get
+            {
+                if (this.editPicture == null)
+                {
+                    this.editPicture = new RelayCommand(this.HandleSelectProfilePicture);
+                }
+                return this.editPicture;
+            }
+            
+        }
+
+        private void HandleSelectProfilePicture(object parameter)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                var url = ImageUploader.UploadImage(filePath);
+                this.ProfilePictureUrl = url;
+                OnPropertyChanged("ProfilePictureUrl");
             }
         }
 
