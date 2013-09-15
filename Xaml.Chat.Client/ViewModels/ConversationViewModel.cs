@@ -25,6 +25,11 @@ namespace Xaml.Chat.Client.ViewModels
             this.CurrentConversation = conversation;
             this.CurrentUserInfo = currentUser;
             this.Partner = partner;
+            this.CurrentConversation.Messages =
+                MessagePersister.GetAllMsgsByConversation(CurrentUserInfo.SessionKey,
+                                                            CurrentConversation.Id);
+
+            OnPropertyChanged("CurrentConversation");
 
             pubnub = new PubnubAPI(PUBLISH_KEY, SUBSCRIBE_KEY, SECRET_KEY, true);
 
@@ -41,9 +46,9 @@ namespace Xaml.Chat.Client.ViewModels
 
         private bool HandleNewMessageReceived(object message)
         {
-            this.CurrentConversation.Messages = 
+            this.CurrentConversation.Messages =
                 MessagePersister.GetAllMsgsByConversation(CurrentUserInfo.SessionKey,
-                                                                                          CurrentConversation.Id);
+                                                            CurrentConversation.Id);
 
             OnPropertyChanged("CurrentConversation");
             return true;
@@ -62,7 +67,7 @@ namespace Xaml.Chat.Client.ViewModels
         {
             get
             {
-                if(this.sendMessage == null)
+                if (this.sendMessage == null)
                 {
                     this.sendMessage = new RelayCommand(HandleSendMessageCommand);
                 }
@@ -83,6 +88,8 @@ namespace Xaml.Chat.Client.ViewModels
 
             MessagePersister.Send(CurrentUserInfo.SessionKey, message);
             pubnub.Publish(channelName, "New message");
+            this.MessageToSend = "";
+            OnPropertyChanged("MessageToSend");
         }
 
         public string Name { get { return "Conversation Window"; } }
