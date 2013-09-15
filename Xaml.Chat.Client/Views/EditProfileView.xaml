@@ -13,6 +13,7 @@
                        Width="120"
                        Height="120"/>
                 <Button Content="Change Picture"
+                        Command="{Binding EditPicture}"
                         Margin="2"/>
             </StackPanel>
             <StackPanel Orientation="Vertical"
