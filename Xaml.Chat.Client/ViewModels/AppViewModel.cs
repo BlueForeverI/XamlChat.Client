@@ -49,6 +49,7 @@
         public RegisterFormViewModel RegisterFormVM { get; set; }
         public GeneralViewModel GeneralVM { get; set; }
         public LoginViewModel LoginVM { get; set; }
+        public SearchFormViewModel SearchVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -123,12 +124,12 @@
 
         private void HanddleGoToProfile(object parameter)
         {
+            this.ProfileVM = new ProfileViewModel(this.CurrentUserSetting);
             this.CurrentViewModel = this.ProfileVM;
         }
         private void HandleGoToSearch(object parameter)
         {
-            //set current to search page
-
+            this.CurrentViewModel = this.SearchVM;
         }
 
         private void HandleLogoutCommand(object parameter)
@@ -147,7 +148,7 @@
         {
             // TODO: initialize our own views
             this.ViewModels = new List<IPageViewModel>();
-            this.ProfileVM = new ProfileViewModel(CurrentUserSetting); 
+            this.ProfileVM = new ProfileViewModel(new UserModel()); 
             this.ConversationVM = new ConversationViewModel();
             var registerVM = new RegisterFormViewModel();
             registerVM.RegisterSuccess += this.RegisterSuccessfull;
@@ -159,6 +160,8 @@
             loginVM.LoginSuccess += this.LoginSuccessful;
             this.LoginVM = loginVM;
 
+            this.SearchVM = new SearchFormViewModel();
+
             this.CurrentViewModel = this.LoginVM;
         }
 
@@ -166,6 +169,7 @@
         {
             this.CurrentUserSetting = e.RegisteredUser;
             this.CurrentViewModel = this.GeneralVM;
+            this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
         }
 
         public void LoginSuccessful(object sender, LoginSuccessArgs e)
@@ -173,6 +177,7 @@
             this.CurrentUserSetting = e.UserSetting;
             this.CurrentViewModel = this.GeneralVM;
             this.LoggedInUser = true;
+            this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
         }
 
         public string Username { get; set; }

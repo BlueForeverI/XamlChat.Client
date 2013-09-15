@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Xaml.Chat.Client.ViewModels"
              xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers">
     <UserControl.Resources>
-        <helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+        <!--<helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>-->
     </UserControl.Resources>
     <DockPanel>
         
