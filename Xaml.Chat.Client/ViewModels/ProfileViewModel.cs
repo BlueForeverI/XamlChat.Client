@@ -77,6 +77,16 @@ namespace Xaml.Chat.Client.ViewModels
             
         }
 
+        public event EventHandler<LoginSuccessArgs> EditSuccess = delegate { };
+
+        public void RaiseEditSuccess(UserModel newUserSetting)
+        {
+            if (this.EditSuccess != null)
+            {
+                this.EditSuccess(this, new LoginSuccessArgs(newUserSetting));
+            }
+        }
+
         private void HandleSelectProfilePicture(object parameter)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -126,6 +136,7 @@ namespace Xaml.Chat.Client.ViewModels
                     OnPropertyChanged("FirstName");
                     OnPropertyChanged("LastName");
                     MessageBox.Show("Profile changed");
+                    RaiseEditSuccess(CurrentUserSettings);
                 }
                 catch (Exception ex)
                 {
