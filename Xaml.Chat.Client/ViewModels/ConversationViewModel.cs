@@ -35,6 +35,7 @@ namespace Xaml.Chat.Client.ViewModels
 
             Thread t = new Thread(() =>
                                   pubnub.Subscribe(channelName, HandleNewMessageReceived));
+            t.IsBackground = true;
             t.Start();
         }
 
