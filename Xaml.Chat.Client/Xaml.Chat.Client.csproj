@@ -69,6 +69,7 @@
     <Compile Include="Data\HttpRequester.cs" />
     <Compile Include="Data\MessagePersister.cs" />
     <Compile Include="Data\UserPersister.cs" />
+    <Compile Include="Helpers\BindingCurrentUser.cs" />
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\ConversationStartedArgs.cs" />
     <Compile Include="Helpers\ImageUploader.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Helpers\PubnubAPI.cs" />
     <Compile Include="Helpers\RegisterSuccessArgs.cs" />
     <Compile Include="Helpers\Sha1Encrypter.cs" />
+    <Compile Include="Helpers\XAMLResource.cs" />
     <Compile Include="Models\ContactRequestModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\LogUserModel.cs" />

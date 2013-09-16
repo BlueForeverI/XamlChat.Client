@@ -59,7 +59,9 @@
             <Button Command="{Binding GoToSearhContacts}">
                 Search Contacts
             </Button>
-            <Button Command="{Binding GoToContactRequests}">Contact Requests</Button>
+            <Button Command="{Binding GoToContactRequests}">
+                <TextBlock Text="{Binding ContactRequestsCount, StringFormat=Contact requests: {0}}" />
+            </Button>
             <Button Command="{Binding GoToMissedConversations}">
                 <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
             </Button>

@@ -1,4 +1,6 @@
-﻿namespace Xaml.Chat.Client.ViewModels
+﻿using Xaml.Chat.Client.Helpers;
+
+namespace Xaml.Chat.Client.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -12,12 +14,6 @@
 
     public class GeneralViewModel : ViewModelBase, IPageViewModel
     {
-        public GeneralViewModel(UserModel currentUser)
-        {
-            this.sessionKey = currentUser.SessionKey;
-            this.currentUser = currentUser;
-        }
-        
         public string Name
         {
             get
@@ -26,28 +22,26 @@
             }
         }
 
-        private string sessionKey;
+        public UserModel CurrentUser { get; set; }
+
         private ObservableCollection<MissedConversationModel> conversations;
+
         private ObservableCollection<UserModel> contacts;
-        private IEnumerable<UserModel> allContacts;
+
+        public event EventHandler<ConversationStartedArgs> ConversationStarted;
+
+        private void RaiseConversationStarted(ConversationModel conversation)
+        {
+            if (this.ConversationStarted != null)
+            {
+                this.ConversationStarted(this, new ConversationStartedArgs(conversation));
+            }
+        }
+
         private UserModel currentUser;
         private ICommand closeConversation;
         private ICommand viewProfile;
         private ICommand startConversation;
-        private string searchText;
-
-        public string SearchText
-        {
-            get
-            {
-                return searchText;
-            }
-            set
-            {
-                this.searchText = value;
-                HandleTextChanged(value);
-            }
-        }
 
         public IEnumerable<MissedConversationModel> Conversations
         {
@@ -55,7 +49,7 @@
             {
                 if (this.conversations == null)
                 {
-                    this.Conversations = ConversationsPersister.GetMissed(sessionKey, this.currentUser.Id);
+                    this.Conversations = ConversationsPersister.GetMissed(CurrentUser.SessionKey, this.currentUser.Id);
                 }
                 return this.conversations;
             }
@@ -73,30 +67,7 @@
             }
         }
 
-        public IEnumerable<UserModel> Contacts
-        {
-            get
-            {
-                if (this.contacts == null)
-                {
-                    this.allContacts = ContactsPersister.GetAllContacts(sessionKey);
-                    this.Contacts = allContacts;
-                }
-                return this.contacts;
-            }
-            set
-            {
-                if (this.contacts == null)
-                {
-                    this.contacts = new ObservableCollection<UserModel>();
-                }
-                this.contacts.Clear();
-                foreach (var item in value)
-                {
-                    this.contacts.Add(item);
-                }
-            }
-        }
+        public IEnumerable<UserModel> Contacts { get; set; }
 
         public ICommand CloseConversation
         {
@@ -133,30 +104,35 @@
                 return this.startConversation;
             }
         }
-        
+
         private void HandleStartConversation(object parameter)
         {
-            var view = CollectionViewSource.GetDefaultView(this.contacts);
-            UserModel selectedUser = view.CurrentItem as UserModel;
-            //TODO: Does it work with the services
-            if (this.conversations.Any(c => c.Username == selectedUser.Username))
+            //var view = CollectionViewSource.GetDefaultView(this.contacts);
+            //UserModel selectedUser = view.CurrentItem as UserModel;
+            ////TODO: Does it work with the services
+            //var newConversation = ConversationsPersister.Start(SessionKey, new ConversationModel()
+            //{
+            //    SecondUser = selectedUser,
+            //});
+            //this.conversations.Add(new MissedConversationModel()
+            //{
+            //    Username=newConversation.SecondUser.Username,
+            //});
+
+            var user = parameter as UserModel;
+            var conversation = new ConversationModel()
             {
-                return;
-            }
-            var newConversation = ConversationsPersister.Start(sessionKey, new ConversationModel()
-            {
-                FirstUser = currentUser,
-                SecondUser = selectedUser,
-            });
-            this.conversations.Add(new MissedConversationModel()
-            {
-                Username = newConversation.SecondUser.Username,
-            });
+                FirstUser = CurrentUser,
+                SecondUser = user
+            };
+
+            var startedConversation = ConversationsPersister.Start(CurrentUser.SessionKey, conversation);
+            RaiseConversationStarted(startedConversation);
         }
 
         private void HandleViewProfile(object parameter)
         {
-            var view = CollectionViewSource.GetDefaultView(this.contacts);            
+            var view = CollectionViewSource.GetDefaultView(this.contacts);
             UserModel selectedUser = view.CurrentItem as UserModel;
         }
 
@@ -165,9 +141,21 @@
             this.conversations.Remove(parameter as MissedConversationModel);
         }
 
-        private void HandleTextChanged(string newText)
-        { 
-            this.Contacts = this.allContacts.Where(um => um.Username.Contains(newText));
+        public GeneralViewModel()
+        {
+            this.Contacts = new List<UserModel>();
+        }
+
+        public GeneralViewModel(UserModel currentUser)
+        {
+            this.CurrentUser = currentUser;
+            ReloadContacts();
+        }
+
+        public void ReloadContacts()
+        {
+            this.Contacts = ContactsPersister.GetAllContacts(this.CurrentUser.SessionKey);
+            OnPropertyChanged("Contacts");
         }
     }
 }

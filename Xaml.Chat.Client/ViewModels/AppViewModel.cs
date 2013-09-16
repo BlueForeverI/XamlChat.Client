@@ -17,6 +17,7 @@ namespace Xaml.Chat.Client.ViewModels
 
         public UserModel CurrentUserSetting { get; set; }
         public int MissedConversationsCount { get; set; }
+        public int ContactRequestsCount { get; set; }
 
         private IPageViewModel currentViewModel;
         private bool loggedInUser = false;
@@ -169,8 +170,8 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleGoToHome(object parameter)
         {
+            this.GeneralVM.ReloadContacts();
             this.CurrentViewModel = this.GeneralVM;
-
         }
 
         private void HanddleGoToProfile(object parameter)
@@ -228,6 +229,7 @@ namespace Xaml.Chat.Client.ViewModels
             BindingCurrentUser.Username = this.CurrentUserSetting.Username;
             generavVM.ConversationStarted += this.ConversationStartedHandler;
             this.GeneralVM = generavVM;
+            
 
             Thread thread = new Thread(() =>
             {
@@ -239,6 +241,10 @@ namespace Xaml.Chat.Client.ViewModels
 
                     this.MissedConversationsCount = missedConversations.Count();
                     OnPropertyChanged("MissedConversationsCount");
+
+                    var contactRequests = ContactsPersister.GetAllRequests(CurrentUserSetting.SessionKey);
+                    this.ContactRequestsCount = contactRequests.Count();
+                    OnPropertyChanged("ContactRequestsCount");
                 };
                 timer.Start();
             });

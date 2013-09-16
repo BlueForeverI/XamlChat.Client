@@ -6,7 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="600"
              xmlns:local="clr-namespace:Xaml.Chat.Client.ViewModels"
-             xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers">    <UserControl.Resources>
+             xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers"
+             xmlns:commandBehavior="clr-namespace:Xaml.Chat.Client.Behavior">    <UserControl.Resources>
         <helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
     </UserControl.Resources>
     <DockPanel Width="600" Height="400">
@@ -46,72 +47,47 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-<<<<<<< .mine
             <Button Grid.Row="2" Grid.Column="0" Content="Start Conversation"
                     Command="{Binding StartConversation}"/>
             <Button Grid.Row="2" Grid.Column="1" Content="View Profile"                   
                     Command="{Binding ViewProfile}"/>
 
-
-
-
-=======
             <Button Grid.Row="2" Grid.Column="0"
                     Command="{Binding StartConversation}"
                     CommandParameter="{Binding ElementName=listViewContacts, Path=SelectedValue}">Start Conversation</Button>
             <Button Grid.Row="2" Grid.Column="1"
                     Command="{Binding ViewProfile}">View Profile</Button>
 
-            
-         
->>>>>>> .theirs
         </Grid>
-        <!--<TabControl DockPanel.Dock="Right" ItemsSource="{Binding Conversations}">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Username}"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <!--Partner Info-->
+                <StackPanel>
+                    <Image Source="{Binding Path=Partner.ProfilePictureUrl}" Width="150" Height="150"/>
+                    <TextBlock Text="{Binding Path=Partner.Username}" HorizontalAlignment="Center"/>
+                </StackPanel>
 
-                        <Button CommandParameter="{Binding}"
-                            Command="{Binding Path=DataContext.CloseConversation, 
-                            RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}">X</Button>
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate >
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <!--Partner Info-->
-                        <StackPanel>
-                            <Image Source="{Binding Path=Partner.ProfilePictureUrl}" Width="150" Height="150"/>
-                            <TextBlock Text="{Binding Path=Partner.Username}" HorizontalAlignment="Center"/>
-                        </StackPanel>
-
-                        <!--Chat Container-->
-                        <DockPanel VerticalAlignment="Stretch">
-                            <ListBox ItemsSource="{Binding Path=CurrentConversation.Messages}" 
-                     DockPanel.Dock="Top" Height="400" Width="400">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <WrapPanel>
-                                            <TextBlock Text="{Binding Path=Sender.Username}" />
-                                            <TextBlock Text=": " />
-                                            <TextBlock Text="{Binding Content}" />
-                                        </WrapPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            <WrapPanel DockPanel.Dock="Bottom" Width="400">
-                                <TextBox Text="{Binding MessageToSend}" 
-                         Width="330" FontSize="15" Height="50" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
-                                <Button Padding="10" FontSize="20" HorizontalAlignment="Right"
-                    Command="{Binding Path=DataContext.ConversationVM.SendMessage, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                    Content="Send" />
-                            </WrapPanel>
-                        </DockPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>-->
+                <!--Chat Container-->
+                <DockPanel VerticalAlignment="Stretch">
+                    <ListBox ItemsSource="{Binding Path=CurrentConversation.Messages}" 
+                DockPanel.Dock="Top" Height="400" Width="400">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Path=Sender.Username}" />
+                                    <TextBlock Text=": " />
+                                    <TextBlock Text="{Binding Content}" />
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <WrapPanel DockPanel.Dock="Bottom" Width="400">
+                        <TextBox Text="{Binding MessageToSend}" 
+                            Width="330" FontSize="15" Height="50" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                        <Button Padding="10" FontSize="20" HorizontalAlignment="Right"
+                            Command="{Binding Path=DataContext.ConversationVM.SendMessage, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                            Content="Send" />
+                    </WrapPanel>
+                </DockPanel>
+            </StackPanel>
     </DockPanel>
 </UserControl>
