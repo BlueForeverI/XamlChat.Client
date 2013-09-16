@@ -54,45 +54,49 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="45"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" 
-                    Visibility="{Binding LoggedInUser, Converter={StaticResource boolToVisibilityConverter}}">
+        
+        <ToolBar Grid.Row="0" Height="45"
+                    Visibility="{Binding LoggedInUser, Converter={StaticResource boolToVisibilityConverter}}"
+                 >
             <Button Command="{Binding GoToHome}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Images\Home.png" />
-                    <TextBlock Text="Home" />
+                    <TextBlock Text="Home" Padding="5" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
             <Button Command="{Binding GoToProfile}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Images\Edit.png" />
-                    <TextBlock Text="Edit Profile" />
+                    <TextBlock Text="Edit Profile" Padding="5" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
             <Button Command="{Binding GoToSearhContacts}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Images\Search.png" />
-                    <TextBlock Text="Search Contacts" />
+                    <TextBlock Text="Search Contacts" Padding="5" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
             <Button Command="{Binding GoToContactRequests}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Images\BusinessContact.png" />
-                    <TextBlock Text="{Binding ContactRequestsCount, StringFormat=Contact requests: {0}}" />
+                    <TextBlock Text="{Binding ContactRequestsCount, StringFormat=Contact requests: {0}}"
+                               Padding="5" VerticalAlignment="Center"/>
                 </StackPanel>
-               
+
             </Button>
 
             <Button Command="{Binding GoToMissedConversations}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Images\MissedCall.png" />
-                    <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
+                    <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}"
+                               Padding="5" VerticalAlignment="Center"/>
                 </StackPanel>
-              
+
             </Button>
-        </StackPanel>
+        </ToolBar>
         <ContentControl Grid.Row="1"
             Content="{Binding Path=CurrentViewModel}" />
     </Grid>
