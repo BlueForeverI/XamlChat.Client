@@ -8,7 +8,11 @@
         <ListBox x:Name="listBoxMissedConversations" ItemsSource="{Binding MissedConversations}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Username}" />
+                    <WrapPanel>
+                        <Image Source="{Binding ProfilePictureUrl}" Width="30" Height="30"/>
+                        <TextBlock Padding="3" Text="{Binding Username}"
+                                       FontSize="13" />
+                    </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
