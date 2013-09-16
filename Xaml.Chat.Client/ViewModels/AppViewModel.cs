@@ -60,6 +60,7 @@ namespace Xaml.Chat.Client.ViewModels
         public SearchFormViewModel SearchVM { get; set; }
         public ContactRequestsViewModel ContactRequestsVM { get; set; }
         public MissedConversationsViewModel MissedConversationsVM { get; set; }
+        public ViewUserProfileVewModel ViewUserProfileVM { get; set; }
 
         public ProfileViewModel ProfileVM { get; set; }
 
@@ -234,6 +235,7 @@ namespace Xaml.Chat.Client.ViewModels
             var generavVM = new GeneralViewModel(CurrentUserSetting);
             BindingCurrentUser.Username = this.CurrentUserSetting.Username;
             generavVM.ConversationStarted += this.ConversationStartedHandler;
+            generavVM.ViewContactProfile += this.ViewContactProfileHandler;
             this.GeneralVM = generavVM;
             
 
@@ -269,6 +271,14 @@ namespace Xaml.Chat.Client.ViewModels
 
             this.ConversationVM = new ConversationViewModel(conversation, CurrentUserSetting, partner);
             this.CurrentViewModel = this.ConversationVM;
+        }
+
+        private void ViewContactProfileHandler(object sender, ViewContactProfileArgs e)
+        {
+            var user = e.ContactInfo;
+
+            this.ViewUserProfileVM = new ViewUserProfileVewModel(user);
+            this.CurrentViewModel = this.ViewUserProfileVM;
         }
 
         private void RegisterSuccessfull(object sender, RegisterSuccessArgs e)
