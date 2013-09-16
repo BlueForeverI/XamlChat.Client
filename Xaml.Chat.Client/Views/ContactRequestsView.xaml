@@ -8,7 +8,11 @@
         <ListBox x:Name="listBoxContactRequests" ItemsSource="{Binding ContactRequests}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Sender.Username}" />
+                    <WrapPanel>
+                        <Image Source="{Binding Sender.ProfilePictureUrl}" Width="30" Height="30"/>
+                        <TextBlock Padding="3" Text="{Binding Sender.Username}"
+                                       FontSize="13" />
+                    </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
