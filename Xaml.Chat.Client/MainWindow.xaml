@@ -6,7 +6,7 @@
         xmlns:ViewModels="clr-namespace:Xaml.Chat.Client.ViewModels" 
         Title="XAML Chat" SizeToContent="WidthAndHeight" MinWidth="300" MinHeight="300"
     xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers"
-    Icon="/Logo/pseudoSkype.jpg">
+    Icon="Images/logo.png">
 
     
     <Window.DataContext>
