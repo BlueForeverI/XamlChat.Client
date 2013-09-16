@@ -31,6 +31,35 @@ namespace Xaml.Chat.Client.ViewModels
             }
         }
 
+        private ICommand goToRegister;
+        public ICommand GoToRegister
+        {
+            get
+            {
+                if(this.goToRegister == null)
+                {
+                    this.goToRegister = new RelayCommand(HandleGoToRegister);
+                }
+
+                return this.goToRegister;
+            }
+        }
+
+        private void HandleGoToRegister(object parameter)
+        {
+            RaiseNavigateToRegister();
+        }
+
+        public event EventHandler NavigateToRegister;
+
+        private void RaiseNavigateToRegister()
+        {
+            if(this.NavigateToRegister != null)
+            {
+                this.NavigateToRegister(this, null);
+            }
+        }
+
         public event EventHandler<LoginSuccessArgs> LoginSuccess;
 
         private void RaiseLoginSuccess(UserModel loggedUser)
