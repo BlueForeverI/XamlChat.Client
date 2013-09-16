@@ -166,6 +166,7 @@ namespace Xaml.Chat.Client.ViewModels
         public void ReloadContacts()
         {
             this.Contacts = ContactsPersister.GetAllContacts(this.CurrentUser.SessionKey);
+            this.FoundContacts = new List<UserModel>(Contacts);
             OnPropertyChanged("FoundContacts");
         }
 

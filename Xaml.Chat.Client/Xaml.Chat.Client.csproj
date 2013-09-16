@@ -70,6 +70,7 @@
     <Compile Include="Data\MessagePersister.cs" />
     <Compile Include="Data\UserPersister.cs" />
     <Compile Include="Helpers\BindingCurrentUser.cs" />
+    <Compile Include="Helpers\BoolToOnlineBrushConverter.cs" />
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\ConversationStartedArgs.cs" />
     <Compile Include="Helpers\DateSimplifierConverter.cs" />
