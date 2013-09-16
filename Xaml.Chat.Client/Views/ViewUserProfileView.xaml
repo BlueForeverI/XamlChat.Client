@@ -6,7 +6,7 @@
               xmlns:viewModels="clr-namespace:Xaml.Chat.Client.ViewModels"
               mc:Ignorable="d" 
               d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel DataContext="">
+    <StackPanel>
         <Image Source="{Binding ProfilePictureUrl}"
                HorizontalAlignment="Left"
                Width="120"

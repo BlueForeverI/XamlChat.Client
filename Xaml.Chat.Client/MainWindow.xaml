@@ -47,6 +47,10 @@
             DataType="{x:Type ViewModels:MissedConversationsViewModel}">
             <Views:MissedConversationsView/>
         </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:ViewUserProfileVewModel}">
+            <Views:ViewUserProfileView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
