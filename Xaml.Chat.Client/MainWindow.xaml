@@ -1,0 +1,71 @@
+﻿<Window 
+        xmlns:Views="clr-namespace:Xaml.Chat.Client.Views"
+        x:Class="Xaml.Chat.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModels="clr-namespace:Xaml.Chat.Client.ViewModels" 
+        Title="XAML Chat" SizeToContent="WidthAndHeight" MinWidth="300" MinHeight="300"
+    xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers"
+    Icon="/Logo/pseudoSkype.jpg">
+
+    
+    <Window.DataContext>
+        <ViewModels:AppViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <helpers:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+
+        <DataTemplate            
+            DataType="{x:Type ViewModels:RegisterFormViewModel}">
+            <Views:RegisterFormView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:ConversationViewModel}">
+            <Views:ConversationView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:GeneralViewModel}">
+            <Views:GeneralView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:LoginViewModel}">
+            <Views:LoginFormView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:SearchFormViewModel}">
+            <Views:SearchFormView/>
+        </DataTemplate>
+        <DataTemplate            
+            DataType="{x:Type ViewModels:ProfileViewModel}">
+            <Views:EditProfile/>
+        </DataTemplate>
+        <DataTemplate      
+            DataType="{x:Type ViewModels:ContactRequestsViewModel}">
+            <Views:ContactRequestsView/>
+        </DataTemplate>
+        <DataTemplate      
+            DataType="{x:Type ViewModels:MissedConversationsViewModel}">
+            <Views:MissedConversationsView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" 
+                    Visibility="{Binding LoggedInUser, Converter={StaticResource boolToVisibilityConverter}}">
+            <Button Command="{Binding GoToHome}">Home</Button>
+            <Button Command="{Binding GoToProfile}">Edit Profile</Button>
+            <Button Command="{Binding GoToSearhContacts}">
+                Search Contacts
+            </Button>
+            <Button Command="{Binding GoToContactRequests}">Contact Requests</Button>
+            <Button Command="{Binding GoToMissedConversations}">
+                <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
+            </Button>
+        </StackPanel>
+        <ContentControl Grid.Row="1"
+            Content="{Binding Path=CurrentViewModel}" />
+    </Grid>
+</Window>
