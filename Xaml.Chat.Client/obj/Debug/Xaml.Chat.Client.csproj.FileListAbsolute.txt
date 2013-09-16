@@ -60,3 +60,5 @@ E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\
 E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\EditProfileView.baml
 E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\GeneralView.baml
 E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\ViewUserProfileView.baml
+E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\MissedConversationsView.baml
+E:\Documents\Telerik-Software-Academy\WPF and XAML\13. Teamwork\XamlChat.Client\Xaml.Chat.Client\obj\Debug\Views\MissedConversationsView.g.cs
