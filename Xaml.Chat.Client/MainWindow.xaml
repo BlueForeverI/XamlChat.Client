@@ -5,7 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ViewModels="clr-namespace:Xaml.Chat.Client.ViewModels" 
         Title="XAML Chat" SizeToContent="WidthAndHeight" MinWidth="300" MinHeight="300"
-    xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers"
+    xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers" Closing="Window_Closing"
     Icon="Images/logo.png">
 
     

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xaml.Chat.Client.Data;
+using Xaml.Chat.Client.Helpers;
 
 namespace Xaml.Chat.Client
 {
@@ -23,6 +25,18 @@ namespace Xaml.Chat.Client
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                UserPersister.LogoutUser(BindingCurrentUser.SessionKey);
+            }
+            catch (Exception)
+            {
+                // logout was not successfull, but the window is closing, so I don't care
+            }
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Xaml.Chat.Client.Helpers
    public static class BindingCurrentUser
     {
        public static string Username { get; set; }
+       public static string SessionKey { get; set; }
     }
 }
