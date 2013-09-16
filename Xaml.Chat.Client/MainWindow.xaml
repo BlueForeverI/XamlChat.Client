@@ -59,17 +59,38 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" 
                     Visibility="{Binding LoggedInUser, Converter={StaticResource boolToVisibilityConverter}}">
-            <Button Command="{Binding GoToHome}">Home</Button>
-            <Button Command="{Binding GoToProfile}">Edit Profile</Button>
+            <Button Command="{Binding GoToHome}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images\Home.png" />
+                    <TextBlock Text="Home" />
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding GoToProfile}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images\Edit.png" />
+                    <TextBlock Text="Edit Profile" />
+                </StackPanel>
+            </Button>
             <Button Command="{Binding GoToSearhContacts}">
-                Search Contacts
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images\Search.png" />
+                    <TextBlock Text="Search Contacts" />
+                </StackPanel>
             </Button>
             <Button Command="{Binding GoToContactRequests}">
-                <TextBlock Text="{Binding ContactRequestsCount, StringFormat=Contact requests: {0}}" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images\BusinessContact.png" />
+                    <TextBlock Text="{Binding ContactRequestsCount, StringFormat=Contact requests: {0}}" />
+                </StackPanel>
+               
             </Button>
 
             <Button Command="{Binding GoToMissedConversations}">
-                <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images\MissedCall.png" />
+                    <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
+                </StackPanel>
+              
             </Button>
         </StackPanel>
         <ContentControl Grid.Row="1"
