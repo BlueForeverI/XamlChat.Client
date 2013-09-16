@@ -123,33 +123,27 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleStartConversation(object parameter)
         {
-            //var view = CollectionViewSource.GetDefaultView(this.contacts);
-            //UserModel selectedUser = view.CurrentItem as UserModel;
-            ////TODO: Does it work with the services
-            //var newConversation = ConversationsPersister.Start(SessionKey, new ConversationModel()
-            //{
-            //    SecondUser = selectedUser,
-            //});
-            //this.conversations.Add(new MissedConversationModel()
-            //{
-            //    Username=newConversation.SecondUser.Username,
-            //});
-
-            var user = parameter as UserModel;
-            var conversation = new ConversationModel()
+            if (parameter != null)
             {
-                FirstUser = CurrentUser,
-                SecondUser = user
-            };
+                var user = parameter as UserModel;
+                var conversation = new ConversationModel()
+                                       {
+                                           FirstUser = CurrentUser,
+                                           SecondUser = user
+                                       };
 
-            var startedConversation = ConversationsPersister.Start(CurrentUser.SessionKey, conversation);
-            RaiseConversationStarted(startedConversation);
+                var startedConversation = ConversationsPersister.Start(CurrentUser.SessionKey, conversation);
+                RaiseConversationStarted(startedConversation);
+            }
         }
 
         private void HandleViewProfile(object parameter)
         {
-            var user = parameter as UserModel;
-            this.ViewContactProfile(this, new ViewContactProfileArgs(user));
+            if (parameter != null)
+            {
+                var user = parameter as UserModel;
+                this.ViewContactProfile(this, new ViewContactProfileArgs(user));
+            }
         }
 
         private void HandleCloseConversation(object parameter)
@@ -182,6 +176,11 @@ namespace Xaml.Chat.Client.ViewModels
                 this.FoundContacts = this.Contacts
                     .Where(um => um.Username.ToLower().Contains(newText.ToLower()));
 
+                OnPropertyChanged("FoundContacts");
+            }
+            else
+            {
+                this.FoundContacts = this.Contacts;
                 OnPropertyChanged("FoundContacts");
             }
         }

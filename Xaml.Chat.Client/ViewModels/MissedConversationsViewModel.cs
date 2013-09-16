@@ -43,15 +43,18 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleViewMissedConversation(object parameter)
         {
-            var missedConversation = parameter as MissedConversationModel;
-            var conversationData = new ConversationModel()
-                                       {
-                                           FirstUser = new UserModel(){Username = CurrentUserInfo.Username},
-                                           SecondUser = new UserModel(){Username = missedConversation.Username}
-                                       };
+            if (parameter != null)
+            {
+                var missedConversation = parameter as MissedConversationModel;
+                var conversationData = new ConversationModel()
+                                           {
+                                               FirstUser = new UserModel() {Username = CurrentUserInfo.Username},
+                                               SecondUser = new UserModel() {Username = missedConversation.Username}
+                                           };
 
-            var startedConversation = ConversationsPersister.Start(CurrentUserInfo.SessionKey, conversationData);
-            RaiseViewConversation(startedConversation);
+                var startedConversation = ConversationsPersister.Start(CurrentUserInfo.SessionKey, conversationData);
+                RaiseViewConversation(startedConversation);
+            }
         }
     }
 }

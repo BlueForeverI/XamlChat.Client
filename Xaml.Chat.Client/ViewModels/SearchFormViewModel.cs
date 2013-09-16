@@ -62,23 +62,26 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleAddToContacts(object parameter)
         {
-            int index = (int) parameter;
-            var userToAdd = FoundUsers.ElementAt(index);
+            int index = (int)parameter;
+            if (index > 0)
+            {
+                var userToAdd = FoundUsers.ElementAt(index);
 
-            try
-            {
-                ContactsPersister.AddUserToContacts(this.SessionKey, userToAdd.Id);
-                ErrorMessage = "";
-                SuccessMessage = "Contact request sent successfully";
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("SuccessMessage");
-            }
-            catch (Exception)
-            {
-                ErrorMessage = "You have already sent request to this person";
-                SuccessMessage = "";
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("SuccessMessage");
+                try
+                {
+                    ContactsPersister.AddUserToContacts(this.SessionKey, userToAdd.Id);
+                    ErrorMessage = "";
+                    SuccessMessage = "Contact request sent successfully";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
+                }
+                catch (Exception)
+                {
+                    ErrorMessage = "You have already sent request to this person";
+                    SuccessMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
+                }
             }
         }
 

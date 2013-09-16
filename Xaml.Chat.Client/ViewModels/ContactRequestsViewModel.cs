@@ -50,26 +50,29 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleAcceptRequest(object parameter)
         {
-            var request = parameter as ContactRequestModel;
-
-            try
+            if (parameter != null)
             {
-                ContactsPersister.AcceptUserRequest(this.SessionKey, request.Id);
-                
-                ErrorMessage = "";
-                SuccessMessage = "User added to contacts";
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("SuccessMessage");
+                var request = parameter as ContactRequestModel;
 
-                this.ContactRequests = ContactsPersister.GetAllRequests(this.SessionKey);
-                OnPropertyChanged("ContactRequests");
-            }
-            catch (Exception)
-            {
-                ErrorMessage = "Could not accept contact request";
-                SuccessMessage = "";
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("SuccessMessage");
+                try
+                {
+                    ContactsPersister.AcceptUserRequest(this.SessionKey, request.Id);
+
+                    ErrorMessage = "";
+                    SuccessMessage = "User added to contacts";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
+
+                    this.ContactRequests = ContactsPersister.GetAllRequests(this.SessionKey);
+                    OnPropertyChanged("ContactRequests");
+                }
+                catch (Exception)
+                {
+                    ErrorMessage = "Could not accept contact request";
+                    SuccessMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
+                }
             }
         }
 
@@ -89,26 +92,29 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleDenyRequest(object parameter)
         {
-            var request = parameter as ContactRequestModel;
-
-            try
+            if (parameter != null)
             {
-                ContactsPersister.DenyUserRequest(this.SessionKey, request.Id);
-                
-                ErrorMessage = "";
-                SuccessMessage = "Contact request denied";
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("SuccessMessage");
+                var request = parameter as ContactRequestModel;
 
-                this.ContactRequests = ContactsPersister.GetAllRequests(this.SessionKey);
-                OnPropertyChanged("ContactRequests");
-            }
-            catch (Exception)
-            {
-                ErrorMessage = "Could not deny contact request";
-                SuccessMessage = "";
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("SuccessMessage");
+                try
+                {
+                    ContactsPersister.DenyUserRequest(this.SessionKey, request.Id);
+
+                    ErrorMessage = "";
+                    SuccessMessage = "Contact request denied";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
+
+                    this.ContactRequests = ContactsPersister.GetAllRequests(this.SessionKey);
+                    OnPropertyChanged("ContactRequests");
+                }
+                catch (Exception)
+                {
+                    ErrorMessage = "Could not deny contact request";
+                    SuccessMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
+                }
             }
         }
     }
