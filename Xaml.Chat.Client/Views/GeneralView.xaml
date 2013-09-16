@@ -56,7 +56,8 @@
                     Command="{Binding StartConversation}"
                     CommandParameter="{Binding ElementName=listViewContacts, Path=SelectedValue}">Start Conversation</Button>
             <Button Grid.Row="2" Grid.Column="1"
-                    Command="{Binding ViewProfile}">View Profile</Button>
+                    Command="{Binding ViewProfile}"
+                    CommandParameter="{Binding ElementName=listViewContacts, Path=SelectedValue}">View Profile</Button>
 
         </Grid>
             <StackPanel Orientation="Horizontal">

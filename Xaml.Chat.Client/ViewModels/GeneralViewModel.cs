@@ -30,6 +30,8 @@ namespace Xaml.Chat.Client.ViewModels
 
         public event EventHandler<ConversationStartedArgs> ConversationStarted;
 
+        public event EventHandler<ViewContactProfileArgs> ViewContactProfile;
+
         private void RaiseConversationStarted(ConversationModel conversation)
         {
             if (this.ConversationStarted != null)
@@ -146,8 +148,8 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleViewProfile(object parameter)
         {
-            var view = CollectionViewSource.GetDefaultView(this.contacts);
-            UserModel selectedUser = view.CurrentItem as UserModel;
+            var user = parameter as UserModel;
+            this.ViewContactProfile(this, new ViewContactProfileArgs(user));
         }
 
         private void HandleCloseConversation(object parameter)
