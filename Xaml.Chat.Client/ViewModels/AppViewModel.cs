@@ -215,6 +215,7 @@ namespace Xaml.Chat.Client.ViewModels
 
             var loginVM = new LoginViewModel();
             loginVM.LoginSuccess += this.LoginSuccessful;
+            loginVM.NavigateToRegister += this.NavigateToRegister;
             this.LoginVM = loginVM;
 
             this.SearchVM = new SearchFormViewModel();
@@ -222,6 +223,11 @@ namespace Xaml.Chat.Client.ViewModels
             this.ContactRequestsVM = new ContactRequestsViewModel();
 
             this.CurrentViewModel = this.LoginVM;
+        }
+
+        private void NavigateToRegister(object sender, EventArgs e)
+        {
+            this.CurrentViewModel = this.RegisterFormVM;
         }
 
         private void InitializeGeneralViewModel()
@@ -279,7 +285,8 @@ namespace Xaml.Chat.Client.ViewModels
         {
             this.CurrentUserSetting = e.RegisteredUser;
             InitializeGeneralViewModel();
-            this.CurrentViewModel = this.GeneralVM;
+            this.CurrentViewModel = this.GeneralVM; 
+            this.LoggedInUser = true;
             this.SearchVM.SessionKey = CurrentUserSetting.SessionKey;
         }
 

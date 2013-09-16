@@ -19,6 +19,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0">Username</Label>
@@ -28,5 +29,7 @@
         <Button Grid.Row="2" Grid.ColumnSpan="2"
                 Command="{Binding Login}" Margin="5"
                 CommandParameter="{Binding ElementName=passwordBox}">Login</Button>
+        <Button Grid.Row="3" Grid.ColumnSpan="2"
+                Command="{Binding GoToRegister}" Margin="5">Register</Button>
     </Grid>
 </UserControl>
