@@ -25,7 +25,7 @@
                      commandBehavior:CommandsBehavior.SearchChanged="{Binding SearchTextChanged}"
                      ></TextBox>
             <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="listViewContacts"
-                      ItemsSource="{Binding Contacts}">
+                      ItemsSource="{Binding FoundContacts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

@@ -41,7 +41,20 @@ namespace Xaml.Chat.Client.ViewModels
         private UserModel currentUser;
         private ICommand closeConversation;
         private ICommand viewProfile;
-        private ICommand startConversation;
+        private ICommand startConversation; private string searchText;
+
+        public string SearchText
+        {
+            get
+            {
+                return searchText;
+            }
+            set
+            {
+                this.searchText = value;
+                HandleTextChanged(value);
+            }
+        }
 
         public IEnumerable<MissedConversationModel> Conversations
         {
@@ -68,6 +81,7 @@ namespace Xaml.Chat.Client.ViewModels
         }
 
         public IEnumerable<UserModel> Contacts { get; set; }
+        public IEnumerable<UserModel> FoundContacts { get; set; } 
 
         public ICommand CloseConversation
         {
@@ -150,12 +164,24 @@ namespace Xaml.Chat.Client.ViewModels
         {
             this.CurrentUser = currentUser;
             ReloadContacts();
+            this.FoundContacts = new List<UserModel>(this.Contacts);
         }
 
         public void ReloadContacts()
         {
             this.Contacts = ContactsPersister.GetAllContacts(this.CurrentUser.SessionKey);
-            OnPropertyChanged("Contacts");
+            OnPropertyChanged("FoundContacts");
+        }
+
+        private void HandleTextChanged(string newText)
+        {
+            if (!string.IsNullOrEmpty(newText))
+            {
+                this.FoundContacts = this.Contacts
+                    .Where(um => um.Username.ToLower().Contains(newText.ToLower()));
+
+                OnPropertyChanged("FoundContacts");
+            }
         }
     }
 }
