@@ -96,6 +96,14 @@
                 </StackPanel>
 
             </Button>
+
+            <Button Command="{Binding Logout}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images\Logout.png" />
+                    <TextBlock Text="Logout" VerticalAlignment="Center" Padding="5"/>
+                </StackPanel>
+
+            </Button>
         </ToolBar>
         <ContentControl Grid.Row="1"
             Content="{Binding Path=CurrentViewModel}" />

@@ -194,8 +194,10 @@ namespace Xaml.Chat.Client.ViewModels
 
         private void HandleLogoutCommand(object parameter)
         {
-            // TODO: our own logout logic
-
+            UserPersister.LogoutUser(CurrentUserSetting.SessionKey);
+            LoggedInUser = false;
+            this.LoginVM.MessageToUser = "";
+            this.CurrentViewModel = this.LoginVM;
         }
 
         private void HandleChangeViewModelCommand(object parameter)
