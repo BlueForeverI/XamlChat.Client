@@ -20,6 +20,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0">Username</Label>
@@ -31,5 +32,7 @@
                 CommandParameter="{Binding ElementName=passwordBox}">Login</Button>
         <Button Grid.Row="3" Grid.ColumnSpan="2"
                 Command="{Binding GoToRegister}" Margin="5">Register</Button>
+        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   Text="{Binding MessageToUser}" Foreground="Red" FontWeight="Bold" />
     </Grid>
 </UserControl>

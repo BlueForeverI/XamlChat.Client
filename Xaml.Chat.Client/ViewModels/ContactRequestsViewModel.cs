@@ -31,6 +31,9 @@ namespace Xaml.Chat.Client.ViewModels
             OnPropertyChanged("ContactRequests");
         }
 
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
+
         private ICommand acceptRequest;
         public ICommand AcceptRequest
         {
@@ -52,14 +55,21 @@ namespace Xaml.Chat.Client.ViewModels
             try
             {
                 ContactsPersister.AcceptUserRequest(this.SessionKey, request.Id);
-                MessageBox.Show("User added to contacts");
+                
+                ErrorMessage = "";
+                SuccessMessage = "User added to contacts";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
 
                 this.ContactRequests = ContactsPersister.GetAllRequests(this.SessionKey);
                 OnPropertyChanged("ContactRequests");
             }
             catch (Exception)
             {
-                MessageBox.Show("Error");
+                ErrorMessage = "Could not accept contact request";
+                SuccessMessage = "";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
             }
         }
 
@@ -84,14 +94,21 @@ namespace Xaml.Chat.Client.ViewModels
             try
             {
                 ContactsPersister.DenyUserRequest(this.SessionKey, request.Id);
-                MessageBox.Show("Contact request denied");
+                
+                ErrorMessage = "";
+                SuccessMessage = "Contact request denied";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
 
                 this.ContactRequests = ContactsPersister.GetAllRequests(this.SessionKey);
                 OnPropertyChanged("ContactRequests");
             }
             catch (Exception)
             {
-                MessageBox.Show("Error");
+                ErrorMessage = "Could not deny contact request";
+                SuccessMessage = "";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
             }
         }
     }

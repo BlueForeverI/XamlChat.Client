@@ -70,5 +70,9 @@
                 Width="100"
                 HorizontalAlignment="Right"
                 Margin="0,0,10,10"/>
+        <TextBlock HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold"
+                   Text="{Binding SuccessMessage}" />
+        <TextBlock HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"
+                   Text="{Binding ErrorMessage}" />
     </StackPanel>
 </UserControl>

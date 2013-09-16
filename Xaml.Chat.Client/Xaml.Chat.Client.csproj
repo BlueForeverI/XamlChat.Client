@@ -78,6 +78,7 @@
     <Compile Include="Helpers\PubnubAPI.cs" />
     <Compile Include="Helpers\RegisterSuccessArgs.cs" />
     <Compile Include="Helpers\Sha1Encrypter.cs" />
+    <Compile Include="Helpers\ViewContactProfileArgs.cs" />
     <Compile Include="Helpers\XAMLResource.cs" />
     <Compile Include="Models\ContactRequestModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="ViewModels\RegisterFormViewModel.cs" />
     <Compile Include="ViewModels\SearchFormViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewUserProfileViewModel.cs" />
     <Compile Include="Views\ContactRequestsView.xaml.cs">
       <DependentUpon>ContactRequestsView.xaml</DependentUpon>
     </Compile>
@@ -205,6 +207,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BusinessContact.png" />
+    <Resource Include="Images\Edit.png" />
+    <Resource Include="Images\Home.png" />
+    <Resource Include="Images\MissedCall.png" />
+    <Resource Include="Images\Search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

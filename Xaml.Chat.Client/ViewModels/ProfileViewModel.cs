@@ -38,6 +38,8 @@ namespace Xaml.Chat.Client.ViewModels
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
 
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
 
         private ICommand editProfile;
 
@@ -104,7 +106,10 @@ namespace Xaml.Chat.Client.ViewModels
 
             if ((this.NewPassword == null || this.NewPassword.Length < 2) && this.OldPassword!=null)
             {
-                MessageBox.Show("Invalid new Password");
+                ErrorMessage = "Invalid new password";
+                SuccessMessage = "";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
             }
             else
             {
@@ -135,12 +140,19 @@ namespace Xaml.Chat.Client.ViewModels
                     OnPropertyChanged("NewPassword");
                     OnPropertyChanged("FirstName");
                     OnPropertyChanged("LastName");
-                    MessageBox.Show("Profile changed");
+
+                    ErrorMessage = "";
+                    SuccessMessage = "Profile updated successfully";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
                     RaiseEditSuccess(CurrentUserSettings);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Problems editing the profile");
+                    ErrorMessage = "Could not edit profile";
+                    SuccessMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("SuccessMessage");
                 }
 
             }

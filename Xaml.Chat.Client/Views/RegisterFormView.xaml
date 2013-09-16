@@ -25,6 +25,7 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                 
                     <Label Grid.Row="0" Grid.Column="0">Username</Label>
@@ -40,6 +41,8 @@
                     <Button Grid.Row="5" Grid.ColumnSpan="2" Margin="10"
                             Command="{Binding Register}"
                             CommandParameter="{Binding ElementName=passwordBox}">Register</Button>
+                    <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Foreground="Red" HorizontalAlignment="Center"
+                               Text="{Binding MessageToUser}" FontWeight="Bold" />
                 </Grid>
                 <Image Height="200" Width="200" Source="{Binding ProfilePictureUrl}" VerticalAlignment="Top" Margin="20 0 0 0"/>
             </StackPanel>

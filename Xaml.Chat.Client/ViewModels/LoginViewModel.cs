@@ -17,6 +17,8 @@ namespace Xaml.Chat.Client.ViewModels
     {
         public string Username { get; set; }
 
+        public string MessageToUser { get; set; }
+
         private ICommand login;
         public ICommand Login
         {
@@ -83,7 +85,8 @@ namespace Xaml.Chat.Client.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Not successfull!");
+                MessageToUser = "Wrong username or password";
+                OnPropertyChanged("MessageToUser");
             }
         }
 

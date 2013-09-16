@@ -31,5 +31,10 @@
         <Button HorizontalAlignment="Center" Padding="10"
                 Command="{Binding AddToContacts}"
                 CommandParameter="{Binding ElementName=listBoxFoundUsers, Path=SelectedIndex}">Add to contacts</Button>
+        
+        <TextBlock HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold"
+                   Text="{Binding SuccessMessage}" />
+        <TextBlock HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"
+                   Text="{Binding ErrorMessage}" />
     </StackPanel>
 </UserControl>

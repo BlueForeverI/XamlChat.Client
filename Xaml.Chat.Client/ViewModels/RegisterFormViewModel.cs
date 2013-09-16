@@ -95,8 +95,11 @@ namespace Xaml.Chat.Client.ViewModels
             }
             catch (Exception)
             {
-                MessageBox.Show("NOT registered");
+                MessageToUser = "Could not register user";
+                OnPropertyChanged("MessageToUser");
             }
         }
+
+        public string MessageToUser { get; set; }
     }
 }

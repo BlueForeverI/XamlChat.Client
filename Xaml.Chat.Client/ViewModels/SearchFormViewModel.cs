@@ -26,6 +26,9 @@ namespace Xaml.Chat.Client.ViewModels
         public string SessionKey;
         public string Name { get { return "Search Form"; } }
 
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
+
         public string QueryText { get; set; }
         public IEnumerable<UserModel> FoundUsers { get; set; } 
 
@@ -65,11 +68,17 @@ namespace Xaml.Chat.Client.ViewModels
             try
             {
                 ContactsPersister.AddUserToContacts(this.SessionKey, userToAdd.Id);
-                MessageBox.Show("Contact request sent!");
+                ErrorMessage = "";
+                SuccessMessage = "Contact request sent successfully";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
             }
             catch (Exception)
             {
-                MessageBox.Show("Error");
+                ErrorMessage = "You have already sent request to this person";
+                SuccessMessage = "";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
             }
         }
 
@@ -83,7 +92,10 @@ namespace Xaml.Chat.Client.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                ErrorMessage = "Could not search for users";
+                SuccessMessage = "";
+                OnPropertyChanged("ErrorMessage");
+                OnPropertyChanged("SuccessMessage");
             }
         }
     }

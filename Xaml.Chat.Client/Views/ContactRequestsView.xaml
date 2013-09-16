@@ -22,5 +22,10 @@
             <Button Command="{Binding DenyRequest}"
                         CommandParameter="{Binding ElementName=listBoxContactRequests, Path=SelectedValue}">Deny</Button>
         </WrapPanel>
+
+        <TextBlock HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold"
+                   Text="{Binding SuccessMessage}" />
+        <TextBlock HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"
+                   Text="{Binding ErrorMessage}" />
     </StackPanel>
 </UserControl>
