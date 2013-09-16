@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             xmlns:converter="clr-namespace:Xaml.Chat.Client.Helpers">
+             xmlns:converter="clr-namespace:Xaml.Chat.Client.Helpers"
+             xmlns:date="clr-namespace:Xaml.Chat.Client.Helpers"
+             >
     <UserControl.Resources>
-        <converter:AddConverter x:Key="XAMLResourceAddConverter" />
+        <converter:AddConverter x:Key="XAMLResourceAddConverter"></converter:AddConverter>
+        <converter:DateSimplifierConverter x:Key="DateSimplifier" />
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <!--Partner Info-->
@@ -34,7 +37,16 @@
                                 </MultiBinding>
                                 </TextBlock.Foreground>
                             </TextBlock>
-                            <TextBlock Text=": " />
+                            <TextBlock Text="[" />
+
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource DateSimplifier}">
+                                        <Binding Path="Date" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Text="]: " />
                             <TextBlock Text="{Binding Content}" />
                         
                         </WrapPanel>
