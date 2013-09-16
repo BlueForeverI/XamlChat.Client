@@ -5,7 +5,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ViewModels="clr-namespace:Xaml.Chat.Client.ViewModels" 
         Title="XAML Chat" SizeToContent="WidthAndHeight" MinWidth="300" MinHeight="300"
-    xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers">
+    xmlns:helpers="clr-namespace:Xaml.Chat.Client.Helpers"
+    Icon="/Logo/pseudoSkype.jpg">
 
     
     <Window.DataContext>
@@ -59,9 +60,7 @@
             <Button Command="{Binding GoToSearhContacts}">
                 Search Contacts
             </Button>
-            <Button Command="{Binding GoToContactRequests}">
-                <TextBlock Text="{Binding ContactRequestsCount, StringFormat=Contact requests: {0}}" />
-            </Button>
+            <Button Command="{Binding GoToContactRequests}">Contact Requests</Button>
             <Button Command="{Binding GoToMissedConversations}">
                 <TextBlock Text="{Binding MissedConversationsCount, StringFormat=Missed conversations: {0}}" />
             </Button>
